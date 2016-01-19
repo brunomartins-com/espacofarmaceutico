@@ -1,12 +1,6 @@
 /resources/assets/
-../public_html/espacofarmaceutico/asssets/
-../PNGs/*
-../PSDs/
-../_antigo/
-../SQL/
 .idea/*
 /vendor
 /node_modules
 /.env
-/_ide_helper.php
 /composer.lock
