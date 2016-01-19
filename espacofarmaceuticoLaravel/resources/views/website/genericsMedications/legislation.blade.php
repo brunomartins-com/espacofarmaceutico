@@ -34,6 +34,7 @@
             </nav>
         </aside>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <article class="text">{!! $text->text !!}</article>
             @foreach($categories as $category)
             <article class="text">
                 <h4 class="text-orange">{{ $category->legislationCategoriesName }}</h4>

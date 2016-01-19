@@ -1,118 +1,119 @@
 <?php
 
-## HOME
-Route::get('/', 'Website\HomeController@index');
+Route::group(['middleware' => 'web'], function() {
+    ## HOME
+    Route::get('/', 'Website\HomeController@index');
 
-## O TEUTO
-Route::get('o-teuto', 'Website\TheTeutoController@index');
+    ## O TEUTO
+    Route::get('o-teuto', 'Website\TheTeutoController@index');
 
-## UNIVERSIDADE TEUTO
-Route::get('universidade-teuto', 'Website\TeutoUniversityController@index');
+    ## UNIVERSIDADE TEUTO
+    Route::get('universidade-teuto', 'Website\TeutoUniversityController@index');
 
-## BLOG
-Route::get('blog', 'Website\BlogController@index');
-Route::get('blog/busca', 'Website\BlogController@index');
-Route::get('blog/{year}/{month}/{day}/{slug}', 'Website\BlogController@read');
+    ## BLOG
+    Route::get('blog', 'Website\BlogController@index');
+    Route::get('blog/busca', 'Website\BlogController@index');
+    Route::get('blog/{year}/{month}/{day}/{slug}', 'Website\BlogController@read');
 
-## NOTICIAS E RELEASES
-Route::get('noticias-e-releases', 'Website\NewsAndReleasesController@index');
-Route::get('noticias-e-releases/busca', 'Website\NewsAndReleasesController@index');
-Route::get('noticias-e-releases/{year}/{month}/{day}/{slug}', 'Website\NewsAndReleasesController@read');
+    ## NOTICIAS E RELEASES
+    Route::get('noticias-e-releases', 'Website\NewsAndReleasesController@index');
+    Route::get('noticias-e-releases/busca', 'Website\NewsAndReleasesController@index');
+    Route::get('noticias-e-releases/{year}/{month}/{day}/{slug}', 'Website\NewsAndReleasesController@read');
 
-## MEDICAMENTOS GENERICOS
-Route::group(['prefix' => 'medicamentos-genericos'], function() {
-    ## PERGUNTAS FREQUENTES
-    Route::get('/', 'Website\GenericsMedicationsController@commonQuestions');
-    Route::get('perguntas-frequentes', 'Website\GenericsMedicationsController@commonQuestions');
-    ## CONCEITO
-    Route::get('conceito', 'Website\GenericsMedicationsController@concept');
-    ## REDUÇÃO DOS GASTOS COM A SAUDE
-    Route::get('reducao-dos-gastos-com-a-saude', 'Website\GenericsMedicationsController@reducingSpendingOnHealth');
-    ## LEGISLACAO
-    Route::get('legislacao', 'Website\GenericsMedicationsController@legislation');
-    ## CONFIABILIDADE E QUALIDADE
-    Route::get('confiabilidade-e-qualidade', 'Website\GenericsMedicationsController@reliabilityAndQuality');
+    ## MEDICAMENTOS GENERICOS
+    Route::group(['prefix' => 'medicamentos-genericos'], function() {
+        ## PERGUNTAS FREQUENTES
+        Route::get('/', 'Website\GenericsMedicationsController@commonQuestions');
+        Route::get('perguntas-frequentes', 'Website\GenericsMedicationsController@commonQuestions');
+        ## CONCEITO
+        Route::get('conceito', 'Website\GenericsMedicationsController@concept');
+        ## REDUÇÃO DOS GASTOS COM A SAUDE
+        Route::get('reducao-dos-gastos-com-a-saude', 'Website\GenericsMedicationsController@reducingSpendingOnHealth');
+        ## LEGISLACAO
+        Route::get('legislacao', 'Website\GenericsMedicationsController@legislation');
+        ## CONFIABILIDADE E QUALIDADE
+        Route::get('confiabilidade-e-qualidade', 'Website\GenericsMedicationsController@reliabilityAndQuality');
+    });
+
+    ## VIDEOS 3D
+    Route::get('videos-3d', 'Website\Movies3DController@index');
+    Route::get('videos-3d/{year}/{month}/{day}/{slug}', 'Website\Movies3DController@watch');
+
+    ## CONSELHOS REGIONAIS
+    Route::get('conselhos-regionais', 'Website\RegionalCouncilsController@index');
+
+    ## SEU NEGOCIO MAIS LUCRATIVO
+    Route::get('seu-negocio-mais-lucrativo', 'Website\YouBusinessMoreLucrativeController@index');
+
+    ## INSTITUTO BULLA
+    Route::get('instituto-bulla', 'Website\BullaInstituteController@index');
+
+    ## VISITE BEM
+    Route::group(['prefix' => 'visite-bem', 'middleware' => 'web'], function() {
+        ## SOBRE O VISITE BEM
+        Route::get('/', 'Website\VisitWellController@index');
+        ## FOTOS
+        Route::get('fotos', 'Website\VisitWellController@photos');
+        Route::post('fotos', 'Website\VisitWellController@filterPhotos');
+        Route::get('fotos/{year}/{month}/{day}/{slug}', 'Website\VisitWellController@photos');
+        ## AGENDE SUA VISITA
+        Route::get('agende-sua-visita', 'Website\VisitWellController@getScheduleYourVisit');
+        Route::post('agende-sua-visita', 'Website\VisitWellController@postScheduleYourVisit');
+    });
+
+    ## EVENTS
+    Route::get('eventos', 'Website\EventsController@index');
+    Route::get('eventos/{type}', 'Website\EventsController@index');
+
+    ## MATERIAL DE APOIO
+    Route::get('material-de-apoio', 'Website\SupportMaterialController@apps');
+    Route::get('material-de-apoio/aplicativos', 'Website\SupportMaterialController@apps');
+    Route::get('material-de-apoio/calculadora-imc', 'Website\SupportMaterialController@imcCalculator');
+    Route::post('material-de-apoio/calculadora-imc', 'Website\SupportMaterialController@imcCalculator');
+
+    ## PRODUTOS
+    Route::get('produtos', 'Website\ProductsController@index');
+    Route::get('produtos/categoria/{slug}', 'Website\ProductsController@index');
+    Route::get('produtos/principio-ativo/{activePrincipleSlug}', 'Website\ProductsController@index');
+    Route::post('produtos/busca', 'Website\ProductsController@search');
+
+    ## FARMACOVIGILANCIA
+    Route::get('farmacovigilancia', 'Website\FarmacovigilanceController@index');
+    Route::post('farmacovigilancia', 'Website\FarmacovigilanceController@send');
+
+    ## CADASTRE-SE
+    Route::get('cadastre-se', 'Website\RegistrationController@index');
+    Route::post('cadastre-se', 'Auth\AuthController@postRegister');
+    Route::get('cadastre-se/confirmacao/{token?}', 'Website\RegistrationController@getConfirmation');
+    //Route::post('cadastre-se', 'Website\RegistrationController@send');
+
+    ## CONTATO
+    Route::get('contato', 'Website\ContactController@index');
+    Route::post('contato', 'Website\ContactController@send');
+
+    ## CITIES
+    Route::post('cities', 'Website\CitiesController@post');
+
+
+    ## RECOVERY PASSWORD
+    Route::post('recuperar-senha', 'Auth\PasswordController@postEmail');
+    Route::get('recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getResetWebsite']);
+    Route::post('recuperar-senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postResetWebsite']);
+
+    ## LOGIN WEBSITE
+    Route::post('login', 'Auth\AuthController@postLoginWebsite');
+
+    ## PROFILE
+    Route::put('profile', 'Website\ProfileController@putUpdate');
+
+    ## LOGOUT WEBSITE
+    Route::get('sair', 'Auth\AuthController@getLogout');
 });
 
-## CONSELHOS REGIONAIS
-Route::get('conselhos-regionais', 'Website\RegionalCouncilsController@index');
-
-## SEU NEGOCIO MAIS LUCRATIVO
-Route::get('seu-negocio-mais-lucrativo', 'Website\YouBusinessMoreLucrativeController@index');
-
-## INSTITUTO BULLA
-Route::get('instituto-bulla', 'Website\BullaInstituteController@index');
-
-## VISITE BEM
-Route::group(['prefix' => 'visite-bem'], function() {
-    ## SOBRE O VISITE BEM
-    Route::get('/', 'Website\VisitWellController@index');
-    ## FOTOS
-    Route::get('fotos', 'Website\VisitWellController@photos');
-    ## AGENDE SUA VISITA
-    Route::get('agende-sua-visita', 'Website\VisitWellController@scheduleYourVisit');
-});
 
 
 
-## RECOVERY PASSWORD
-Route::post('recuperar-senha', 'Auth\PasswordController@postEmail');
-Route::get('recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getResetWebsite']);
-Route::post('recuperar-senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postResetWebsite']);
 
-## LOGIN WEBSITE
-Route::post('login', 'Auth\AuthController@postLoginWebsite');
-
-## PROFILE
-Route::put('profile', 'Website\ProfileController@putUpdate');
-
-## PHOTOS AND VIDEO
-Route::post('photos', 'Website\HomeController@postSentPhotos');
-Route::post('video', 'Website\HomeController@postSentVideo');
-Route::post('receipts', 'Website\HomeController@postSentReceipts');
-
-## UPLOAD
-Route::post('upload', 'Website\HomeController@postUpload');
-Route::post('upload-cupons', 'Website\HomeController@postUploadReceipts');
-
-## LOGOUT WEBSITE
-Route::get('sair', 'Auth\AuthController@getLogout');
-
-## NEWSLETTER
-Route::post('newsletter', 'Website\NewsletterController@post');
-
-## THE COMPETITION
-Route::get('o-concurso', 'Website\TheCompetitionController@index');
-
-## REGULATION
-Route::get('regulamento', 'Website\RegulationController@index');
-
-## AWARDS
-Route::get('premios', 'Website\AwardsController@index');
-
-## WINNERS 2014
-Route::get('ganhadores-2014', 'Website\Winners2014Controller@index');
-
-## CONTACT
-Route::get('contato', 'Website\ContactController@index');
-Route::post('contato', 'Website\ContactController@post');
-
-## CITIES
-Route::post('cities', 'Website\CitiesController@post');
-
-## PRODUCTS
-Route::get('produtos-participantes', 'Website\ProductsController@index');
-
-## REGISTRATION
-Route::get('inscricao', 'Website\RegistrationController@index');
-Route::post('inscricao', 'Auth\AuthController@postRegister');
-Route::get('inscricao/confirmacao/{token?}', 'Website\RegistrationController@getConfirmation');
-
-## FINALISTS
-Route::get('finalistas', 'Website\FinalistsController@index');
-
-## WINNERS
-Route::get('vencedores', 'Website\WinnersController@index');
 
 Route::group(['middleware' => 'guest'], function () {
 

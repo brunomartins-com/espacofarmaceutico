@@ -66,11 +66,14 @@ Contact: hello@brunomartins.com
             <a href="#" title="Menu" class="btn-nav">Menu</a>
         </div>
         <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-0 col-xs-4 col-xs-offset-0">
+            @if(Auth::check() and Auth::getUser()->type == 1)
+            <a href="#" title="Bem Vindo {{ Auth::getUser()->name }}" class="btn btn-main btn-block hidden btn-user-data"><span class="glyphicon glyphicon-user"></span></a>
+            @else
             <a href="#" title="Login" class="btn btn-main btn-block btn-login">Login</a>
-            <a href="#" title="Bem Vindo Fulano de Tal" class="btn btn-main btn-block hidden btn-user-data"><span class="glyphicon glyphicon-user"></span></a>
+            @endif
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 hidden-xs">
-            <a href="#" title="Cadastrar" class="btn btn-main btn-block">Cadastrar</a>
+            <a href="{{ url('cadastre-se') }}" title="Cadastrar" class="btn btn-main btn-block">Cadastrar</a>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 hidden-xs">
             <a href="{{ url('conselhos-regionais') }}" class="font-size-12 text-orange" title="Conselhos Regionais">Conselhos Regionais</a>
@@ -125,22 +128,23 @@ Contact: hello@brunomartins.com
         <!-- LOGIN -->
         <section class="login">
             {!! Form::open([
-                'id' => 'login',
+                'id' => 'form-login',
                 'method' => 'post',
                 'class' => 'form-horizontal',
                 'enctype' => 'multipart/form-data',
                 'url' => url('login')
                 ])
             !!}
+            {!! Form::hidden('type', 1) !!}
             <h3 class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-4 col-xs-12">Faça aqui seu login e tenha acesso exclusivo a conteúdos, notícias, eventos e vídeos 3D.</h3>
             <p class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-                {!! Form::label('user', 'Usuário:') !!}
-                {!! Form::text('user', '', ['class'=>'form-control', 'id'=>'user']) !!}
+                {!! Form::label('email', 'E-mail:') !!}
+                {!! Form::email('email', '', ['class'=>'form-control', 'id'=>'email']) !!}
             </p>
             <p class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
                 {!! Form::label('password', 'Senha:') !!}
                 <input type="password" name="password" id="password" class="form-control" />
-                <a href="#" class="text-orange-yellow font-size-11" title="Esqueceu sua senha?">Esqueceu sua senha?</a>
+                <a href="#" id="forgot-password" class="text-orange-yellow font-size-11" title="Esqueceu sua senha?">Esqueceu sua senha?</a>
             </p>
             <p class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                 {!! Form::button('Entrar', ['class'=>'btn btn-main btn-block', 'type'=>'submit']) !!}
@@ -150,6 +154,27 @@ Contact: hello@brunomartins.com
                 <p>Não sou cadastrado.</p>
                 <a href="{{ url('cadastre-se') }}" class="btn btn-main" title="Cadastrar">Cadastrar</a>
             </div>
+        </section>
+        <!-- LOGIN -->
+        <section class="forgot-password">
+            {!! Form::open([
+                'id' => 'form-recovery-password',
+                'method' => 'post',
+                'class' => 'form-horizontal',
+                'enctype' => 'multipart/form-data',
+                'url' => url('esqueceu-sua-senha')
+                ])
+            !!}
+            <h3 class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-4 col-xs-12">Informe seu e-mail para a recuperação do seu acesso.</h3>
+            <p class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                {!! Form::label('email', 'E-mail:') !!}
+                {!! Form::email('email', '', ['class'=>'form-control', 'id'=>'email']) !!}
+                <a href="#" id="return-login" class="text-orange-yellow font-size-11" title="Voltar">Voltar</a>
+            </p>
+            <p class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                {!! Form::button('Enviar', ['class'=>'btn btn-main btn-block', 'type'=>'submit']) !!}
+            </p>
+            {!! Form::close() !!}
         </section>
         <!-- USER DATA -->
         <section class="user-data">

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\CommonQuestions;
 use App\Concept;
 use App\ReducingSpendingOnHealth;
-use App\Legislation;
+use App\Texts;
 use App\LegislationCategories;
 use App\ReliabilityAndQuality;
 use App\Pages;
@@ -56,9 +56,10 @@ class GenericsMedicationsController extends Controller
 
         $pages = Pages::where('slug', '=', $page)->first();
 
+        $text = Texts::find(3);
         $categories = LegislationCategories::orderBy('legislationCategoriesId', 'ASC')->get();
 
-        return view('website.genericsMedications.legislation')->with(compact('page', 'pages', 'websiteSettings', 'categories'));
+        return view('website.genericsMedications.legislation')->with(compact('page', 'pages', 'websiteSettings', 'categories', 'text'));
     }
 
     public function reliabilityAndQuality()

@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['babyName', 'babyBirthdate', 'babyGender', 'birthCertificate', 'name', 'rg', 'cpf', 'address', 'gender', 'number', 'complement', 'district', 'state', 'city', 'phone', 'mobile', 'email', 'password', 'token', 'type', 'active'];
+    protected $fillable = ['name', 'email', 'crf', 'gender', 'birthDate', 'zipCode', 'address', 'state', 'city', 'newsletter', 'password', 'token', 'type', 'active'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -36,14 +36,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
-
-    public function photos($usersId)
-    {
-        return Photos::where('usersId', '=', $usersId);
-    }
-
-    public function videos($usersId)
-    {
-        return Videos::where('usersId', '=', $usersId);
-    }
 }

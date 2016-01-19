@@ -170,14 +170,14 @@
                     <div class="ws_images">
                         <div class="ws_list">
                             <ul>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/2013030483052_1ba95f43048bdd9d2ea4fce4ddb8c395.jpg') }}" id="wows1_0" alt="Aerodini"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/2013031581041_ea74f4155e621a7428036ec09975ea3f.jpg') }}" id="wows1_1" alt="Viasil"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/2013031584252_c9a451e9d303f11798a96f7e17cc95d8.jpg') }}" id="wows1_2" alt="Triaxon"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/2013031584445_84c22e7aef01dd22104e534758a37d4b.jpg') }}" id="wows1_3" alt="Tetraderm"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/20130221151647_a51701be307c105bebabfb6c00b15ed4.jpg') }}" id="wows1_4" alt="Genéricos Teuto"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/20130221151939_58cb05bf25f3d1ce86ac45ab80a6fe7c.jpg') }}" id="wows1_5" alt="Captopril"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/20130221151954_b64c40a3fe7e4cdc4a24693851f60a14.jpg') }}" id="wows1_6" alt="Carbamazepina"></li>
-                                <li><img src="{{ asset('assets/images/_upload/produtos/20130221152013_2f39492d4e3b2c1280989eef9a54622a.jpg') }}" id="wows1_7" alt="Carbosisteína"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/2013030483052_1ba95f43048bdd9d2ea4fce4ddb8c395.jpg') }}" id="wows1_0" alt="Aerodini"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/2013031581041_ea74f4155e621a7428036ec09975ea3f.jpg') }}" id="wows1_1" alt="Viasil"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/2013031584252_c9a451e9d303f11798a96f7e17cc95d8.jpg') }}" id="wows1_2" alt="Triaxon"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/2013031584445_84c22e7aef01dd22104e534758a37d4b.jpg') }}" id="wows1_3" alt="Tetraderm"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/20130221151647_a51701be307c105bebabfb6c00b15ed4.jpg') }}" id="wows1_4" alt="Genéricos Teuto"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/20130221151939_58cb05bf25f3d1ce86ac45ab80a6fe7c.jpg') }}" id="wows1_5" alt="Captopril"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/20130221151954_b64c40a3fe7e4cdc4a24693851f60a14.jpg') }}" id="wows1_6" alt="Carbamazepina"></li>
+                                <li><img src="{{ asset('assets/images/_upload/products/20130221152013_2f39492d4e3b2c1280989eef9a54622a.jpg') }}" id="wows1_7" alt="Carbosisteína"></li>
                             </ul>
                         </div>
                     </div>

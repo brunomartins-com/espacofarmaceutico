@@ -3,11 +3,10 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Mail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
-use App\Advertising;
-use App\Calls;
+use App\Texts;
 use App\Pages;
 
 class ContactController extends Controller
@@ -17,25 +16,15 @@ class ContactController extends Controller
         $page = 'contato';
         //WEBSITE SETTINGS
         $websiteSettings = \App\Exceptions\Handler::readFile("websiteSettings.json");
-        //STATES
-        $statesConsult = \App\Exceptions\Handler::readFile("states.json");
-        $states = ['' => 'UF'];
-        foreach($statesConsult as $state):
-            $states[$state['uf']] = $state['uf'];
-        endforeach;
 
         $pages = Pages::where('slug', '=', $page)->first();
-        $advertising = Advertising::orderByRaw("RAND()")->get();
-        foreach($advertising as $ad){
-            array_add($ad, "image", Advertising::imageVideo($ad->url));
-            array_set($ad, "url", Advertising::embedVideo($ad->url, 1));
-        }
-        $calls = Calls::orderByRaw("RAND()")->limit(2)->get();
 
-        return view('website.contact')->with(compact('page', 'websiteSettings', 'pages', 'advertising', 'calls', 'states'));
+        $text = Texts::find(2);
+
+        return view('website.contact.index')->with(compact('page', 'websiteSettings', 'pages', 'text'));
     }
 
-    public function post(Request $request)
+    public function send(Request $request)
     {
         //WEBSITE SETTINGS
         $websiteSettings = \App\Exceptions\Handler::readFile("websiteSettings.json");
@@ -43,16 +32,24 @@ class ContactController extends Controller
         $this->validate($request, [
             'name'         => 'required|max:100',
             'email'        => 'required|email|max:40',
-            'state'        => 'required',
-            'city'         => 'required',
             'message'      => 'required'
+        ],
+        [
+            'name.required'             => 'Informe seu nome',
+            'name.max'                  => 'O nome não pode passar de :max caracteres',
+            'email.required'            => 'Informe seu e-mail',
+            'email.email'               => 'Informe um e-mail válido',
+            'email.max'                 => 'O e-mail não pode passar de :max caracteres',
+            'message.required'          => 'Escreva uma mensagem'
         ]);
+
         array_set($request, "date", Carbon::now()->format('d/m/Y'));
 
-        Mail::send('template.emailContact', ['request' => $request], function ($message) use ($websiteSettings) {
+        Mail::send('website.contact.email', ['request' => $request], function ($message) use ($websiteSettings) {
             $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
-                ->subject('Contato pelo Site [hipodermeomega.com.br]')
-                ->to($websiteSettings['email']);
+                ->subject('Contato pelo Site [espacofarmaceutico.com.br]')
+                ->to($websiteSettings['email'])
+                ->to('hello@brunomartins.com');
         });
 
         $success = "Contato enviado com sucesso!";

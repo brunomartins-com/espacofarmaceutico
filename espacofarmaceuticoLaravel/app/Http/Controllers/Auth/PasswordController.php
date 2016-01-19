@@ -18,7 +18,7 @@ class PasswordController extends Controller
 
     protected $redirectPath = 'login';
 
-    protected $subject = 'Concurso Bebê Hipoderme - Recuperação de Senha';
+    protected $subject = 'Espaço Farmacêutico - Recuperação de Senha';
 
     public function __construct()
     {
@@ -27,7 +27,7 @@ class PasswordController extends Controller
 
     protected function resetPassword($user, $password)
     {
-        $user->password = bcrypt($password);
+        $user->password = md5($password);//bcrypt($password);
 
         $user->save();
     }

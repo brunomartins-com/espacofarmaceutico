@@ -26,7 +26,7 @@
                 @include('website.print-text-size')
             </div>
         </header>
-        <aside class="col-lg-4 col-md-4 col-sm-12 col-xs-12 hidden-print">
+        <aside class="col-lg-4 col-md-4 hidden-sm hidden-xs hidden-print">
             <h3 class="font-size-30 text-orange strong">{{ $blog->title }}</h3>
             <hr>
             <time>{{ $blog->date->formatLocalized('%d - %B - %Y') }}</time>
@@ -39,7 +39,7 @@
             @endif
             <hr>
             <div class="clear"></div>
-            <div class="box-share clear hidden-sm hidden-xs">
+            <div class="box-share clear">
                 @include('website.share')
             </div>
             <hr>
@@ -64,10 +64,11 @@
         </aside>
         <div id="col-dir" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <article class="text">
-                <div class="visible-print">
-                    <h3 class="font-size-30 strong">{{ $blog->title }}</h3>
+                <div class="hidden-md hidden-lg">
+                    <time>{{ $blog->date->formatLocalized('%d - %B - %Y') }}</time>
+                    <h3 class="font-size-30 text-orange strong clear">{{ $blog->title }}</h3>
+                    <div class="clearfix"></div>
                     <hr>
-                    <p>{{ $blog->date->formatLocalized('%d - %B - %Y') }}</p>
                     @if(!empty($blog->autorSource))
                     <p>
                         <span>Autor/Fonte:</span>

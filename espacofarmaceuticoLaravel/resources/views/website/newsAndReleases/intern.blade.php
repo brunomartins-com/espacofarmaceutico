@@ -26,7 +26,7 @@
                 @include('website.print-text-size')
             </div>
         </header>
-        <aside class="col-lg-4 col-md-4 col-sm-12 col-xs-12 hidden-print">
+        <aside class="col-lg-4 col-md-4 hidden-sm hidden-xs hidden-print">
             <h3 class="font-size-30 text-orange strong">{{ $newsAndReleases->title }}</h3>
             <hr>
             <time>{{ $newsAndReleases->date->formatLocalized('%d - %B - %Y') }}</time>
@@ -57,10 +57,11 @@
         </aside>
         <div id="col-dir" class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <article class="text">
-                <div class="visible-print">
-                    <h3 class="font-size-30 strong">{{ $newsAndReleases->title }}</h3>
+                <div class="hidden-md hidden-lg">
+                    <time>{{ $newsAndReleases->date->formatLocalized('%d - %B - %Y') }}</time>
+                    <h3 class="font-size-30 text-orange strong clear">{{ $newsAndReleases->title }}</h3>
+                    <div class="clearfix"></div>
                     <hr>
-                    <p>{{ $newsAndReleases->date->formatLocalized('%d - %B - %Y') }}</p>
                 </div>
                 @if(!empty($newsAndReleases->image))
                 <img src="{{ asset('assets/images/_upload/newsAndReleases/'.$newsAndReleases->image) }}" alt="{{ $newsAndReleases->title }}" class="img-responsive" />
