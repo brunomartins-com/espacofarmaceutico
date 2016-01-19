@@ -7,9 +7,8 @@ elixir(function(mix) {
     mix.sass(['custom.scss'], '../public_html/espacofarmaceutico/assets/css/main.css');
     mix.sass(['owl.carousel.scss'], '../public_html/espacofarmaceutico/assets/css/owl.carousel.css');
     mix.sass(['wow.slider.scss'], '../public_html/espacofarmaceutico/assets/css/wow.slider.css');
-    mix.scripts(['bootstrap.js', 'custom.js', 'jquery.print.js', 'jquery.validate.min.js'], '../public_html/espacofarmaceutico/assets/js/main.min.js');
+    mix.scripts(['bootstrap.js', 'custom.js', 'jquery.print.js', 'jquery.validate.min.js', 'jquery.mask.min.js'], '../public_html/espacofarmaceutico/assets/js/main.min.js');
     mix.scripts(['wow.slider.js'], '../public_html/espacofarmaceutico/assets/js/wow.slider.min.js');
-
 
     // ADMIN
     mix.styles([
