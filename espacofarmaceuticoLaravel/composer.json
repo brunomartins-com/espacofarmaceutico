@@ -1,7 +1,7 @@
 {
     "name": "espacofarmaceutico.com.br",
     "description": "Espaço Farmacêutico - Teuto/Pfizer",
-    "keywords": ["framework", "laravel", "Teuto", "Pfizer", "Espaço Farmacêutico"],
+    "keywords": ["Teuto", "Pfizer", "Espaco Farmaceutico"],
     "type": "project",
     "require": {
         "php": ">=5.5.9",
@@ -9,8 +9,8 @@
         "filp/whoops": "^1.1",
         "doctrine/dbal": "2.5.*",
         "guzzlehttp/guzzle": "~6.0",
-        "laravelcollective/html": "~5.1",
-        "intervention/image": "2.*",
+        "laravelcollective/html": "5.2.*",
+        "intervention/image": "~2.3",
         "soapbox/laravel-formatter": "~2.0"
     },
     "require-dev": {
