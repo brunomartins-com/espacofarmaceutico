@@ -35,18 +35,8 @@ Route::group(['middleware' => 'web'], function() {
         Route::get('confiabilidade-e-qualidade', 'Website\GenericsMedicationsController@reliabilityAndQuality');
     });
 
-    ## VIDEOS 3D
-    Route::get('videos-3d', 'Website\Movies3DController@index');
-    Route::get('videos-3d/{year}/{month}/{day}/{slug}', 'Website\Movies3DController@watch');
-
     ## CONSELHOS REGIONAIS
     Route::get('conselhos-regionais', 'Website\RegionalCouncilsController@index');
-
-    ## SEU NEGOCIO MAIS LUCRATIVO
-    Route::get('seu-negocio-mais-lucrativo', 'Website\YouBusinessMoreLucrativeController@index');
-
-    ## INSTITUTO BULLA
-    Route::get('instituto-bulla', 'Website\BullaInstituteController@index');
 
     ## VISITE BEM
     Route::group(['prefix' => 'visite-bem', 'middleware' => 'web'], function() {
@@ -61,22 +51,11 @@ Route::group(['middleware' => 'web'], function() {
         Route::post('agende-sua-visita', 'Website\VisitWellController@postScheduleYourVisit');
     });
 
-    ## EVENTS
-    Route::get('eventos', 'Website\EventsController@index');
-    Route::get('eventos/{type}', 'Website\EventsController@index');
-
     ## MATERIAL DE APOIO
     Route::get('material-de-apoio', 'Website\SupportMaterialController@apps');
     Route::get('material-de-apoio/aplicativos', 'Website\SupportMaterialController@apps');
     Route::get('material-de-apoio/calculadora-imc', 'Website\SupportMaterialController@imcCalculator');
     Route::post('material-de-apoio/calculadora-imc', 'Website\SupportMaterialController@imcCalculator');
-
-    ## PRODUTOS
-    Route::get('produtos', 'Website\ProductsController@index');
-    Route::get('produtos/categoria/{slug}', 'Website\ProductsController@index');
-    Route::get('produtos/catalogos-digitais', 'Website\ProductsController@digitalCatalogs');
-    Route::get('produtos/principio-ativo/{activePrincipleSlug}', 'Website\ProductsController@index');
-    Route::post('produtos/busca', 'Website\ProductsController@search');
 
     ## FARMACOVIGILANCIA
     Route::get('farmacovigilancia', 'Website\FarmacovigilanceController@index');
@@ -101,15 +80,47 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getResetWebsite']);
     Route::post('recuperar-senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postResetWebsite']);
 
+
     ## LOGIN WEBSITE
+    Route::get('login', function () {
+        return redirect('/')->with('message', 'Página restrita a usuários cadastrados');
+    });
     Route::post('login', 'Auth\AuthController@postLoginWebsite');
 
-    ## PROFILE
-    Route::put('profile', 'Website\ProfileController@putUpdate');
+    Route::group(['middleware' => 'auth'], function () {
 
-    ## LOGOUT WEBSITE
-    Route::get('sair', 'Auth\AuthController@getLogout');
+        ## PROFILE
+        Route::get('meus-dados', 'Website\ProfileController@getData');
+        Route::put('meus-dados', 'Website\ProfileController@putDataUpdate');
 
+        Route::get('meu-endereco', 'Website\ProfileController@getAddress');
+        Route::put('meu-endereco', 'Website\ProfileController@putAddressUpdate');
+
+        ## LOGOUT WEBSITE
+        Route::get('sair', 'Auth\AuthController@getLogout');
+
+        ## PRODUTOS
+        Route::get('produtos', 'Website\ProductsController@index');
+        Route::get('produtos/categoria/{slug}', 'Website\ProductsController@index');
+        Route::get('produtos/catalogos-digitais', 'Website\ProductsController@digitalCatalogs');
+        Route::get('produtos/principio-ativo/{activePrincipleSlug}', 'Website\ProductsController@index');
+        Route::post('produtos/busca', 'Website\ProductsController@search');
+
+        ## EVENTOS
+        Route::get('eventos', 'Website\EventsController@index');
+        Route::get('eventos/{type}', 'Website\EventsController@index');
+
+        ## SEU NEGOCIO MAIS LUCRATIVO
+        Route::get('seu-negocio-mais-lucrativo', 'Website\YouBusinessMoreLucrativeController@index');
+
+        ## INSTITUTO BULLA
+        Route::get('instituto-bulla', 'Website\BullaInstituteController@index');
+
+        ## VIDEOS 3D
+        Route::get('videos-3d', 'Website\Movies3DController@index');
+        Route::get('videos-3d/{year}/{month}/{day}/{slug}', 'Website\Movies3DController@watch');
+
+    });
 
     // ADMIN AUTHENTICATION
     Route::get('admin', function () {
@@ -118,41 +129,12 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('admin/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
     Route::post('admin/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
 
-// PASSWORD RESET LINK REQUEST
-    Route::get('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@getEmail']);
-    Route::post('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@postEmail']);
-// PASSWORD RESET
-    Route::get('admin/recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getReset']);
-    Route::post('admin/senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postReset']);
-});
-
-
-
-
-
-
-Route::group(['middleware' => 'guest'], function () {
-
-    // Login - Logout routes
-    //Route::get('login', 'Auth\AuthController@getLogin');
-    //Route::post('login', 'Auth\AuthController@postLogin');
-
-    /*// PASSWORD RESET LINK REQUEST
+    // PASSWORD RESET LINK REQUEST
     Route::get('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@getEmail']);
     Route::post('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@postEmail']);
     // PASSWORD RESET
-    Route::get('recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getReset']);
-    Route::post('senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postReset']);*/
-
-
-    /*// Password reset link request routes
-    Route::get('forgot-password', 'Auth\PasswordController@getEmail');
-    Route::post('forgot-password', 'Auth\PasswordController@postEmail');
-
-    // Password reset routes
-    Route::get('recuperar-senha/{token}', 'Auth\PasswordController@getReset');
-    Route::post('recuperar-senha', 'Auth\PasswordController@postReset');*/
-
+    Route::get('admin/recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getReset']);
+    Route::post('admin/senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postReset']);
 });
 
 ## ADMIN

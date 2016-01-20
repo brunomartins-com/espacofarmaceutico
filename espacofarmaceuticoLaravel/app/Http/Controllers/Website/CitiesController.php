@@ -12,7 +12,7 @@ class CitiesController extends Controller
     public function post(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'state' => 'required|max:2|min:2'
+            'state' => 'required'
         ]);
 
         $cities = "";

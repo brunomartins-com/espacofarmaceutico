@@ -138,9 +138,9 @@ class VisitWellController extends Controller
 
         //STATES
         $statesConsult = \App\Exceptions\Handler::readFile("states.json");
-        $states = ['' => 'UF'];
+        $states = ['' => 'Estado'];
         foreach($statesConsult as $state):
-            $states[$state['uf']] = $state['uf'];
+            $states[$state['name']] = $state['name'];
         endforeach;
 
         $text = Texts::find(21);

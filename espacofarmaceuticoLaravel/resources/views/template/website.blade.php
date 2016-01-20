@@ -164,7 +164,7 @@ Contact: hello@brunomartins.com
                 'method' => 'post',
                 'class' => 'form-horizontal',
                 'enctype' => 'multipart/form-data',
-                'url' => url('esqueceu-sua-senha')
+                'url' => url('meus-dados')
                 ])
             !!}
             <h3 class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-4 col-xs-12">Informe seu e-mail para a recuperação do seu acesso.</h3>
@@ -182,7 +182,7 @@ Contact: hello@brunomartins.com
         <!-- USER DATA -->
         <section class="user-data">
             <div class="col-lg-6 col-lg-offset-1 col-md-8 col-md-offset-0 col-sm-9 col-xs-12">
-                <h3>Olá, Sr.(a) {{ Auth::getUser()->name }}</h3>
+                <h3>Olá, {{ Auth::getUser()->name }}</h3>
                 <ul>
                     <li><a href="{{ url('meus-dados') }}" title="Meus Dados">Meus Dados</a></li>
                     <li><a href="{{ url('meu-endereco') }}" title="Meu Endereço">Meu Endereço</a></li>
