@@ -203,13 +203,13 @@
         </div>
         <div class="calls hidden-sm hidden-xs">
             <div class="col-lg-4 col-md-4">
-                <a href="#"><img src="{{ asset('assets/images/_upload/chamadas/01.jpg') }}" alt="EQ's" class="img-responsive"></a>
+                <a href="#"><img src="{{ asset('assets/images/_upload/calls/01.jpg') }}" alt="EQ's" class="img-responsive"></a>
             </div>
             <div class="col-lg-4 col-md-4">
-                <a href="#"><img src="{{ asset('assets/images/_upload/chamadas/02.jpg') }}" alt="Teuto 360º" class="img-responsive"></a>
+                <a href="#"><img src="{{ asset('assets/images/_upload/calls/02.jpg') }}" alt="Teuto 360º" class="img-responsive"></a>
             </div>
             <div class="col-lg-4 col-md-4">
-                <a href="#"><img src="{{ asset('assets/images/_upload/chamadas/03.jpg') }}" alt="Vídeos 3D" class="img-responsive"></a>
+                <a href="#"><img src="{{ asset('assets/images/_upload/calls/03.jpg') }}" alt="Vídeos 3D" class="img-responsive"></a>
             </div>
         </div>
         <div class="clear"></div>

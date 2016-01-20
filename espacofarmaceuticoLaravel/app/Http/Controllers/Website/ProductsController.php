@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Products;
 use App\ProductsCategories;
+use App\DigitalCatalogs;
 use App\Pages;
 
 
@@ -80,5 +81,30 @@ class ProductsController extends Controller
             ->get();
 
         return view('website.products.index')->with(compact('page', 'pages', 'websiteSettings', 'productsCategories', 'products', 'activePrinciples', 'keywordsSearched'));
+    }
+
+    public function digitalCatalogs()
+    {
+        $page = 'produtos';
+        $websiteSettings = \App\Exceptions\Handler::readFile("websiteSettings.json");
+
+        $pages = Pages::where('slug', '=', $page)->first();
+
+        $productsCategories = ProductsCategories::orderBy('sortorder', 'asc')->get();
+
+        $activePrinciples = Products::addSelect(DB::raw('DISTINCT(activePrinciple)'))
+            ->where('activePrinciple', '!=', '')
+            ->orderBy('activePrinciple', 'asc')
+            ->get();
+        foreach($activePrinciples as $activePrinciple){
+            array_add($activePrinciple, 'activePrincipleSlug', str_slug($activePrinciple->activePrinciple, '-'));
+        }
+
+        $digitalCatalogs = DigitalCatalogs::orderBy('sortorder', 'asc')->paginate(3);
+
+        $categoryChosen = "Catálogos Digitais";
+        $categoryChosenSlug = "catalogos-digitais";
+
+        return view('website.products.digitalCatalogs')->with(compact('page', 'pages', 'websiteSettings', 'productsCategories', 'digitalCatalogs', 'categoryChosen', 'categoryChosenSlug', 'activePrinciples', 'activePrincipleChosenSlug'));
     }
 }

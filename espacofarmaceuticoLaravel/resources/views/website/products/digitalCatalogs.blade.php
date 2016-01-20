@@ -17,8 +17,7 @@
 <div class="container">
     <div class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0 col-sm-12 col-xs-12 text-page">
         <header>
-            <h2 class="title pc80">{{ $pages->title }}</span>
-            </h2>
+            <h2 class="title pc80">{{ $pages->title }}</h2>
             <div class="box-share pc20 hidden-xs">
                 @include('website.print-text-size')
             </div>
@@ -65,40 +64,15 @@
             <div class="clear visible-sm visible-xs"><hr></div>
         </aside>
         <section class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-            <p class="margin-top-20 strong text-gray">
-                @if(isset($categoryChosenSlug) and $categoryChosenSlug != "")
-                {{ $categoryChosen.":" }}
-                @else
-                Listando:
-                @endif
-                @if($products->count() == 0){{ 'Nenhum produto' }}@elseif($products->count() == 1){{ '1 produto' }}@else{{ $products->count().' produtos' }}@endif
-            </p>
-            <header class="header-product hidden-xs">
-                <div class="col-lg-2 col-md-2 col-sm-2 text-center">Foto</div>
-                <div class="col-lg-4 col-md-4 col-sm-4">Medicamento</div>
-                <div class="col-lg-5 col-md-5 col-sm-5">Apresentação</div>
-                <div class="col-lg-1 col-md-1 col-sm-1 text-center">pdf</div>
-            </header>
-            @foreach($products as $key => $product)
-            <article class="products @if(($key % 2) != 0){{ 'bg-white' }}@endif">
-                <div class="col-lg-2 col-md-2 col-sm-2 text-center hidden-xs">
-                    <img src="{{ asset('assets/images/_upload/products/'.$product->image) }}" alt="{{ $product->name }}" class="img-responsive" />
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-9">
-                    <p class="remove-padding-b">{{ $product->name }}</p>
-                    <p class="visible-xs remove-padding-t">{{ $product->presentation }}</p>
-                </div>
-                <div class="col-lg-5 col-md-5 col-sm-5 hidden-xs"><p>{{ $product->presentation }}</p></div>
-                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-                    <a href="#" class="btn-pdf" title="{{ $product->name }}"></a>
-                </div>
+            @foreach($digitalCatalogs as $digitalCatalog)
+            <article class="blog">
+                <h3>{{ $digitalCatalog->title }}</h3>
+                {!! $digitalCatalog->embed !!}
             </article>
             @endforeach
-            @if(!isset($keywordsSearched))
-            <div class="clear text-center margin-top-35">
-                {!! str_replace('&amp;?pagina=', '&amp;pagina=', $products->links()) !!}
+            <div class="clear text-center">
+                {!! str_replace('&amp;?pagina=', '&amp;pagina=', $digitalCatalogs->links()) !!}
             </div>
-            @endif
         </section>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 navigation-bottom">
             <a href="{{ url('/') }}" class="btn btn-main" title="Home">Home</a>
