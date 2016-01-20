@@ -1,0 +1,40 @@
+h1.logo{ width:80%; height: 45px; float: left; text-indent: -99999px; background: url('/assets/admin/img/logo.png') no-repeat; }
+#logoNoSidebar{ width: 60% !important; }
+@media screen and (max-width: @screen-sm-min) {
+  #logoNoSidebar{ width: 100% !important; clear: both; background-position: center; margin-bottom: 20px; }
+}
+.dataTable {
+  thead{
+    th{ background-color: @black; color: @white; }
+  }
+  tbody{
+    .btn-xs, form{
+      display: inline-block;
+    }
+  }
+}
+.pac-container{ z-index: 99999; }
+.newEntityMap{ height: 350px; }
+table.dataTable thead > tr > th.text-center{ padding-left: 0; padding-right: 0; }
+.form-input{
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li{
+      height: 100px;
+      margin: 0 20px 0 0;
+      display: inline-block;
+      a{
+        img{
+          height: 100%;
+        }
+        &:hover{
+          img{
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+  }
+}
