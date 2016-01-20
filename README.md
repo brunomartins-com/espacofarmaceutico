@@ -1,4 +1,4 @@
-# Espaço Farmaceutico
+# Espaço Farmacêutico
 
-> Um site do grupo Teuto
+> Um site do grupo Teuto/Pfizer
 
