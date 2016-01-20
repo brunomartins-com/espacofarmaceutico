@@ -1,6 +1,6 @@
 /resources/assets/
-.idea/*
+.idea/
+../.idea/
 /vendor
 /node_modules
 /.env
-/composer.lock
