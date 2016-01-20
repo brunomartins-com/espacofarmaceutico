@@ -74,6 +74,7 @@ Route::group(['middleware' => 'web'], function() {
     ## PRODUTOS
     Route::get('produtos', 'Website\ProductsController@index');
     Route::get('produtos/categoria/{slug}', 'Website\ProductsController@index');
+    Route::get('produtos/catalogos-digitais', 'Website\ProductsController@digitalCatalogs');
     Route::get('produtos/principio-ativo/{activePrincipleSlug}', 'Website\ProductsController@index');
     Route::post('produtos/busca', 'Website\ProductsController@search');
 
