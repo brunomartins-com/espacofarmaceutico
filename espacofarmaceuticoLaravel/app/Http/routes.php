@@ -108,6 +108,21 @@ Route::group(['middleware' => 'web'], function() {
 
     ## LOGOUT WEBSITE
     Route::get('sair', 'Auth\AuthController@getLogout');
+
+
+    // ADMIN AUTHENTICATION
+    Route::get('admin', function () {
+        return redirect(route('login'));
+    });
+    Route::get('admin/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
+    Route::post('admin/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
+
+// PASSWORD RESET LINK REQUEST
+    Route::get('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@getEmail']);
+    Route::post('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@postEmail']);
+// PASSWORD RESET
+    Route::get('admin/recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getReset']);
+    Route::post('admin/senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postReset']);
 });
 
 
@@ -138,21 +153,6 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('recuperar-senha', 'Auth\PasswordController@postReset');*/
 
 });
-
-
-// AUTHENTICATION
-Route::get('admin', function () {
-    return redirect(route('login'));
-});
-Route::get('admin/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);
-Route::post('admin/login', ['as' => 'login', 'uses' => 'Auth\AuthController@postLogin']);
-
-// PASSWORD RESET LINK REQUEST
-Route::get('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@getEmail']);
-Route::post('admin/senha/email', ['as' => 'passwordEmail', 'uses' => 'Auth\PasswordController@postEmail']);
-// PASSWORD RESET
-Route::get('admin/recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getReset']);
-Route::post('admin/senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postReset']);
 
 ## ADMIN
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
