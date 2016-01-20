@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "607e786c99e49d9784763e4ea43a0f57",
-    "content-hash": "ba27cb9960aa7a12081f753696876c7b",
+    "hash": "4493517bcb2fe2ed0214a0025cfd40a7",
+    "content-hash": "91f696c908c57402c5e7dfc7ce42e434",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -2990,7 +2990,7 @@
             ],
             "authors": [
                 {
-                    "name": "François Zaninotto"
+                    "name": "Francois Zaninotto"
                 }
             ],
             "description": "Faker is a PHP library that generates fake data for you.",
@@ -3085,7 +3085,7 @@
             ],
             "authors": [
                 {
-                    "name": "Padraic Brady",
+                    "name": "Pádraic Brady",
                     "email": "padraic.brady@gmail.com",
                     "homepage": "http://blog.astrumfutura.com"
                 },
@@ -4182,9 +4182,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.9"

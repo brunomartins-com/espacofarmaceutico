@@ -66,14 +66,16 @@ Contact: hello@brunomartins.com
             <a href="#" title="Menu" class="btn-nav">Menu</a>
         </div>
         <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-0 col-xs-4 col-xs-offset-0">
-            @if(Auth::check() and Auth::getUser()->type == 1)
-            <a href="#" title="Bem Vindo {{ Auth::getUser()->name }}" class="btn btn-main btn-block hidden btn-user-data"><span class="glyphicon glyphicon-user"></span></a>
-            @else
+            @if(!Auth::check() or Auth::getUser()->type != 1)
             <a href="#" title="Login" class="btn btn-main btn-block btn-login">Login</a>
             @endif
         </div>
         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 hidden-xs">
+            @if(!Auth::check() or Auth::getUser()->type != 1)
             <a href="{{ url('cadastre-se') }}" title="Cadastrar" class="btn btn-main btn-block">Cadastrar</a>
+            @else
+            <a href="#" title="Bem Vindo {{ Auth::getUser()->name }}" class="btn btn-main btn-block btn-user-data"><span class="glyphicon glyphicon-user"></span></a>
+            @endif
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 hidden-xs">
             <a href="{{ url('conselhos-regionais') }}" class="font-size-12 text-orange" title="Conselhos Regionais">Conselhos Regionais</a>
@@ -176,10 +178,11 @@ Contact: hello@brunomartins.com
             </p>
             {!! Form::close() !!}
         </section>
+        @if(Auth::check() and Auth::getUser()->type == 1)
         <!-- USER DATA -->
         <section class="user-data">
             <div class="col-lg-6 col-lg-offset-1 col-md-8 col-md-offset-0 col-sm-9 col-xs-12">
-                <h3>Olá, Sr. João Henrique Machado</h3>
+                <h3>Olá, Sr.(a) {{ Auth::getUser()->name }}</h3>
                 <ul>
                     <li><a href="{{ url('meus-dados') }}" title="Meus Dados">Meus Dados</a></li>
                     <li><a href="{{ url('meu-endereco') }}" title="Meu Endereço">Meu Endereço</a></li>
@@ -189,6 +192,7 @@ Contact: hello@brunomartins.com
                 <a href="{{ url('sair') }}" class="btn btn-block btn-main" title="Sair">Sair</a>
             </div>
         </section>
+        @endif
         <!-- SEARCH -->
         <section class="search">
             {!! Form::open([
