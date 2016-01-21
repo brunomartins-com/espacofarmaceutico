@@ -61,6 +61,9 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('farmacovigilancia', 'Website\FarmacovigilanceController@index');
     Route::post('farmacovigilancia', 'Website\FarmacovigilanceController@send');
 
+    ## TRABALHE CONOSCO
+    Route::get('trabalhe-conosco', 'Website\WorkWithUsController@index');
+
     ## CADASTRE-SE
     Route::get('cadastre-se', 'Website\RegistrationController@index');
     Route::post('cadastre-se', 'Auth\AuthController@postRegister');
