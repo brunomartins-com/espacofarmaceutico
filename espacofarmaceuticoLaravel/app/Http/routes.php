@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['middleware' => 'web'], function() {
     ## HOME
     Route::get('/', 'Website\HomeController@index');
@@ -35,9 +34,6 @@ Route::group(['middleware' => 'web'], function() {
         Route::get('confiabilidade-e-qualidade', 'Website\GenericsMedicationsController@reliabilityAndQuality');
     });
 
-    ## CONSELHOS REGIONAIS
-    Route::get('conselhos-regionais', 'Website\RegionalCouncilsController@index');
-
     ## VISITE BEM
     Route::group(['prefix' => 'visite-bem', 'middleware' => 'web'], function() {
         ## SOBRE O VISITE BEM
@@ -56,6 +52,9 @@ Route::group(['middleware' => 'web'], function() {
     Route::get('material-de-apoio/aplicativos', 'Website\SupportMaterialController@apps');
     Route::get('material-de-apoio/calculadora-imc', 'Website\SupportMaterialController@imcCalculator');
     Route::post('material-de-apoio/calculadora-imc', 'Website\SupportMaterialController@imcCalculator');
+
+    ## CONSELHOS REGIONAIS
+    Route::get('conselhos-regionais', 'Website\RegionalCouncilsController@index');
 
     ## FARMACOVIGILANCIA
     Route::get('farmacovigilancia', 'Website\FarmacovigilanceController@index');
@@ -77,12 +76,13 @@ Route::group(['middleware' => 'web'], function() {
     ## CITIES
     Route::post('cities', 'Website\CitiesController@post');
 
+    ## SEARCH
+    Route::post('busca', 'Website\SearchController@post');
 
     ## RECOVERY PASSWORD
     Route::post('recuperar-senha', 'Auth\PasswordController@postEmail');
     Route::get('recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getResetWebsite']);
     Route::post('recuperar-senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postResetWebsite']);
-
 
     ## LOGIN WEBSITE
     Route::get('login', function () {

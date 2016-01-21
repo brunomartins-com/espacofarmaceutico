@@ -858,6 +858,16 @@ body:not(.home){
         }
       }
     }
+    &.search-menu{
+      ul{
+        padding-top: 10px;
+        margin-top: 10px;
+        border-top: 1px solid lighten($gray-light, 15%);
+        li:last-child{
+          border-bottom: 1px solid lighten($gray-light, 15%);
+        }
+      }
+    }
   }
   .header-product{
     padding: 8px 0;

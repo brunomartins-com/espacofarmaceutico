@@ -11,13 +11,23 @@ $(document).ready(function(){
     $('#forgot-password').click(function() {
         $('.login').hide();
         $('.forgot-password').show();
-
     });
     //RETURN LOGIN
     $('#return-login').click(function() {
         $('.login').show();
         $('.forgot-password').hide();
-
+    });
+    //OPEN TEUTO 360º
+    $('#teuto-360').click(function() {
+        window.open('http://www.espacofarmaceutico.com.br/teuto-360', '', 'resizable=0,Menubar=no,toolbar=no,scrollbars=0,status=0,top=0,left=0,screenX=' + window.screenLeft + ',screenY=' + window.screenTop + ',width=820,height=620');
+    });
+    //MENU SEARCH
+    $('.search-menu a').click(function() {
+        $('.search-results').addClass('hidden');
+        var idDivShow = $(this).data('type');
+        $('#'+idDivShow).removeClass('hidden');
+        $('.search-menu a').removeClass('active');
+        $('.search-menu a[data-type='+idDivShow+']').addClass('active');
     });
     //ACTION FOR MENU
     $(document).click(function(event) {
@@ -55,7 +65,7 @@ $(document).ready(function(){
         //window.print();
         return false;
     });
-    var originalFontSize = $('.text').css('font-size')
+    var originalFontSize = $('.text').css('font-size');
     $(".text-size").click(function(){
         var currentFontSize = $('.text').css('font-size');
         if(currentFontSize != '14px') {
@@ -142,127 +152,5 @@ $(document).ready(function(){
             $('.fisical-people').addClass('hidden');
             $('.juridical-people').removeClass('hidden');
         }
-    });
-
-    //PROFILE - EDIT MY DATA
-    $(".form-profile label p").click(function(e){
-        var element = $(this).attr('id');
-        $('.form-profile p#'+element).hide();
-        if(element != 'babyGender' && element != 'gender' && element != 'state'){
-            $('.form-profile input[name='+element+']').show();
-            $('.form-profile input[name='+element+']').focus();
-        }else{
-            $('.form-profile select[name='+element+']').show();
-            $('.form-profile select[name='+element+']').focus();
-        }
-    });
-    $('.form-profile label input').keypress(function(e){
-        var id = $(this).attr('id');
-        var inputName = $(this).attr('name');
-        var inputRequired = $(this).attr('required');
-        var inputValue = $(this).val();
-        /* * making sure if the event is Keycode (for IE and other browsers) * if not take Which event (Firefox) */
-        var key = (e.keyCode?e.keyCode:e.which);
-        /* making sure if the key press has been pressed the "ENTER" */
-        if(key == 13){
-            if(inputRequired == 'required' && inputValue == '') {
-                alert('Preenchimento Obrigatório!');
-                $(this).focus();
-            }else if($('label.error[for='+id+']').length > 0 && (!$('label.error[for='+id+']').attr('style') || $('label.error[for='+id+']').attr('style') == "display: block;")){
-                alert('Existem erros pendentes!');
-                $(this).focus();
-            }else{
-                var data = {
-                    '_token' : $('input[type=hidden][name=_token]').val(),
-                    'id' : $('input[type=hidden][name=userId]').val(),
-                    'inputName' : inputName,
-                    'inputValue' : inputValue
-                };
-                $.ajax({
-                    type : "PUT",
-                    url: "/profile",
-                    data: data,
-                    dataType: "json",
-                    success: function(d){
-                        if(d['success'] == 0){
-                            alert(d['message']);
-                        }else {
-                            $('input[name='+inputName+']').hide();
-                            r = d['newInputValue'];
-                            if (r == '') {
-                                r = '- - -';
-                            }
-                            $('.form-profile p#' + inputName).html(r);
-                            $('.form-profile p#' + inputName).show();
-                        }
-                    }
-                });
-            }
-        }else{
-            return true;
-        }
-    });
-    $('.form-profile label select').change(function(e){
-        var id = $(this).attr('id');
-        var inputName = $(this).attr('name');
-        var inputRequired = $(this).attr('required');
-        var inputValue = $(this).val();
-        if(inputRequired == 'required' && inputValue == ''){
-            alert('Preenchimento Obrigatório!');
-            $(this).focus();
-        }else {
-            var data = {
-                '_token' : $('input[type=hidden][name=_token]').val(),
-                'id': $('input[type=hidden][name=userId]').val(),
-                'inputName': inputName,
-                'inputValue': inputValue
-            };
-            $.ajax({
-                type: "PUT",
-                url: "/profile",
-                data: data,
-                dataType: "json",
-                success: function (d) {
-                    if(d['success'] == 0){
-                        alert(d['message']);
-                    }else {
-                        $('select[name='+inputName+']').hide();
-                        r = d['newInputValue'];
-                        $('.form-profile p#' + inputName).html(r);
-                        $('.form-profile p#' + inputName).show();
-                    }
-                }
-            });
-        }
-    });
-    $('.form-profile').validate({
-        ignore: [],
-        rules: {
-            'cpf': {
-                required: true,
-                cpf: true
-            },
-            'email': {
-                required: true,
-                email: true
-            }
-        },
-        messages: {
-            'cpf': {
-                required: 'Informe o CPF'
-            },
-            'email': {
-                required: 'Informe seu e-mail',
-                email: 'Informe um e-mail válido'
-            }
-        }
-    });
-    $('input[type=text][name=phone]').keyup(function(){
-        $('label.error[for=mobile]').html('');
-        $('label.error[for=mobile]').hide();
-    });
-    $('input[type=text][name=mobile]').keyup(function(){
-        $('label.error[for=phone]').html('');
-        $('label.error[for=phone]').hide();
     });
 });
