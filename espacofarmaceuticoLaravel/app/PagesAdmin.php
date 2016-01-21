@@ -8,7 +8,7 @@ class PagesAdmin extends Model
 {
     protected $table = 'pagesAdmin';
 
-    protected $primaryKey = 'pagesAdminId';
+    protected $primaryKey = false;
 
     public $timestamps = false;
 

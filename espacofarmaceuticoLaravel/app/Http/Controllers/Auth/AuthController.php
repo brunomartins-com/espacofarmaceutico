@@ -58,11 +58,10 @@ class AuthController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        array_add($request, 'active', '1');
         $credentials = $this->getCredentials($request);
 
         if (Auth::guard($this->getGuard())->attempt($credentials, $request->has('remember'))) {
-            return $this->handleUserWasAuthenticated($request, $throttles);
+            return $this->handleUserWasAuthenticatedWebsite($request, $throttles);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -87,7 +86,7 @@ class AuthController extends Controller
      * @param  bool  $throttles
      * @return \Illuminate\Http\Response
      */
-    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    protected function handleUserWasAuthenticatedWebsite(Request $request, $throttles)
     {
         if ($throttles) {
             $this->clearLoginAttempts($request);
@@ -103,13 +102,36 @@ class AuthController extends Controller
             }
         }
 
-        if(Auth::user()->type == 1){
-            return redirect('/');
-        }else {
-            ACL::loadPermissions();
+        return redirect('/');
+    }
 
-            return redirect()->intended($this->redirectPath());
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  bool  $throttles
+     * @return \Illuminate\Http\Response
+     */
+    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    {
+        if ($throttles) {
+            $this->clearLoginAttempts($request);
         }
+
+        if (method_exists($this, 'authenticated')) {
+            if(Auth::user()->type == 1){
+                redirect('/admin/login')->withErrors('Usuário não cadastrado!');
+            }else if(Auth::user()->type == 0 and Auth::user()->active == 0){
+                return redirect('/admin/login')->withErrors('Seu cadastro ainda não está ativo\nPara ativá-lo entre em contato com o administrador.');
+            }else {
+                return $this->authenticated($request, Auth::user());
+            }
+        }
+
+        ACL::loadPermissions();
+
+        return redirect()->intended($this->redirectPath());
+
     }
 
     /**
@@ -144,8 +166,7 @@ class AuthController extends Controller
             $credentials = [
                 'email'     => $request->get('email'),
                 'password'  => md5($request->get('password')),
-                'type'      => $request->get('type'),
-                'active'    => 1
+                'type'      => $request->get('type')
             ];
         }
         return $credentials;

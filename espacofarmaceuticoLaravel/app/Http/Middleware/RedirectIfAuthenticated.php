@@ -18,7 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if($request->type == 0){
-            $redirectPath = "/admin/usuarios";
+            $redirectPath = "/admin/home";
         }else{
             $redirectPath = "/cadastre-se";
         }
