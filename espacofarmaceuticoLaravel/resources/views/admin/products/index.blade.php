@@ -42,7 +42,7 @@
                 </ul>
                 <h3 class="block-title">
                     {!! Form::button('<i class="fa fa-plus"></i> Adicionar', ['class'=>'btn btn-primary', 'onclick'=>'window.open(\''.route('productsAdd').'\', \'_self\');']) !!}
-                    {!! Form::button('<i class="fa fa-list"></i> Ordenar', ['class'=>'btn btn-info push-10-l', 'onclick'=>'window.open(\''.route('productsOrder').'\', \'_self\');']) !!}
+                    {!! Form::button('<i class="fa fa-external-link"></i> Categorias', ['class'=>'btn btn-warning push-10-l', 'onclick'=>'window.open(\''.route('productsCategories').'\', \'_self\');']) !!}
                 </h3>
             </div>
             <div class="block-content">
@@ -67,30 +67,33 @@
                         <tr>
                             <th style="width: 50px;">Id</th>
                             <th>Nome/Produto</th>
+                            <th>Categoria</th>
                             <th class="text-center sorting-none" style="width: 70px;">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                     @foreach($products as $product)
                         <tr>
-                            <td>{{ $product->sortorder }}</td>
-                            <td class="font-w600">{{ $product->title }}</td>
+                            <td>{{ $product->productsId }}</td>
+                            <td class="font-w600">{{ $product->name }}</td>
+                            <td>{{ $product->category->productsCategoriesName }}</td>
                             <td class="text-center">
-                                    {!! Form::button('<i class="fa fa-pencil"></i>', ['title'=>'Editar', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-primary',
-                                    'onclick'=>'window.open(\''.route('productsEdit', $product->productsId).'\', \'_self\')']) !!}
+                                {!! Form::button('<i class="fa fa-pencil"></i>', ['title'=>'Editar', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-primary',
+                                'onclick'=>'window.open(\''.route('productsEdit', $product->productsId).'\', \'_self\')']) !!}
 
-                                    {!! Form::open([
-                                        'id' => 'textDelete'.$product->productsId,
-                                        'method' => 'delete',
-                                        'enctype' => 'multipart/form-data',
-                                        'url' => ''
-                                        ])
-                                    !!}
-                                    {!! Form::hidden('productsId', $product->productsId) !!}
-                                    {!! Form::hidden('image', $product->image) !!}
-                                    {!! Form::button('<i class="fa fa-trash"></i>', ['title'=>'Excluir', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-danger btn-delete',
-                                    'data-url'=>route('productsDelete'), 'data-form'=>true, 'data-id-form'=>'textDelete'.$product->productsId]) !!}
-                                    {!! Form::close() !!}
+                                {!! Form::open([
+                                    'id' => 'textDelete'.$product->productsId,
+                                    'method' => 'delete',
+                                    'enctype' => 'multipart/form-data',
+                                    'url' => ''
+                                    ])
+                                !!}
+                                {!! Form::hidden('productsId', $product->productsId) !!}
+                                {!! Form::hidden('bull', $product->bull) !!}
+                                {!! Form::hidden('image', $product->image) !!}
+                                {!! Form::button('<i class="fa fa-trash"></i>', ['title'=>'Excluir', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-danger btn-delete',
+                                'data-url'=>route('productsDelete'), 'data-form'=>true, 'data-id-form'=>'textDelete'.$product->productsId]) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                     @endforeach
@@ -115,9 +118,10 @@
 <script>
     jQuery(function(){
         jQuery('.js-dataTable-full').dataTable({
-            order: [[0, 'asc']],
+            order: [[1, 'asc']],
             columnDefs: [ { orderable: false, targets: 'sorting-none' } ],
-            bPaginate: false,
+            pageLength: 20,
+            lengthMenu: [[25, 50, 100, 500], [25, 50, 100, 500]],
             language: {
                 'url': '<?php echo asset('assets/json/dataTablesPT-BR.json'); ?>'
             }

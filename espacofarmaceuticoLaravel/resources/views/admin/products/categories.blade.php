@@ -1,6 +1,6 @@
 @extends('admin.sidebar-template')
 
-@section('title', 'Chamadas | ')
+@section('title', 'Categorias (Produtos) | ')
 
 @section('head')
 @parent
@@ -17,12 +17,13 @@
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Chamadas <small></small>
+                    Produtos <small></small>
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Chamadas</li>
+                    <li><a href="{{ route('products') }}" class="text-orange" title="Produtos">Produtos</a></li>
+                    <li>Categorias</li>
                     <li>Lista</li>
                 </ol>
             </div>
@@ -41,7 +42,8 @@
                     </li>
                 </ul>
                 <h3 class="block-title">
-                    {!! Form::button('<i class="fa fa-plus"></i> Adicionar', ['class'=>'btn btn-primary', 'onclick'=>'window.open(\''.route('callsAdd').'\', \'_self\');']) !!}
+                    {!! Form::button('<i class="fa fa-plus"></i> Adicionar', ['class'=>'btn btn-primary', 'onclick'=>'window.open(\''.route('productsCategoriesAdd').'\', \'_self\');']) !!}
+                    {!! Form::button('<i class="fa fa-list"></i> Ordenar', ['class'=>'btn btn-warning push-10-l', 'onclick'=>'window.open(\''.route('productsCategoriesOrder').'\', \'_self\');']) !!}
                 </h3>
             </div>
             <div class="block-content">
@@ -65,32 +67,37 @@
                     <thead>
                         <tr>
                             <th style="width: 50px;">Id</th>
-                            <th>Título</th>
-                            <th class="sorting-none">Imagem</th>
+                            <th>Categoria</th>
+                            <th>Tipo</th>
                             <th class="text-center sorting-none" style="width: 70px;">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($calls as $call)
+                    @foreach($categories as $category)
                         <tr>
-                            <td>{{ $call->callsId }}</td>
-                            <td class="font-w600">{{ $call->title }}</td>
-                            <td width="100"><img src="/{{ $imageDetails['folder'].$call->image }}" width="100" alt="{{ $call->title }}" /></td>
+                            <td>{{ $category->sortorder }}</td>
+                            <td class="font-w600">{{ $category->productsCategoriesName }}</td>
+                            <td>
+                                @if($category->type == 0)
+                                    {{ 'Categoria' }}
+                                @elseif($category->type == 1)
+                                    {{ 'Página' }}
+                                @endif
+                            </td>
                             <td class="text-center">
                                 {!! Form::button('<i class="fa fa-pencil"></i>', ['title'=>'Editar', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-primary',
-                                'onclick'=>'window.open(\''.route('callsEdit', $call->callsId).'\', \'_self\')']) !!}
+                                'onclick'=>'window.open(\''.route('productsCategoriesEdit', $category->productsCategoriesId).'\', \'_self\')']) !!}
 
                                 {!! Form::open([
-                                    'id' => 'textDelete'.$call->callsId,
+                                    'id' => 'textDelete'.$category->productsCategoriesId,
                                     'method' => 'delete',
                                     'enctype' => 'multipart/form-data',
                                     'url' => ''
                                     ])
                                 !!}
-                                {!! Form::hidden('callsId', $call->callsId) !!}
-                                {!! Form::hidden('image', $call->image) !!}
+                                {!! Form::hidden('productsCategoriesId', $category->productsCategoriesId) !!}
                                 {!! Form::button('<i class="fa fa-trash"></i>', ['title'=>'Excluir', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-danger btn-delete',
-                                'data-url'=>route('callsDelete'), 'data-form'=>true, 'data-id-form'=>'textDelete'.$call->callsId]) !!}
+                                'data-url'=>route('productsCategoriesDelete'), 'data-msg'=>'Tem certeza que deseja deletar essa categoria?<br>Isso será um ato irreversível e todos os produtos relacionados a ela serão excluídos.', 'data-form'=>true, 'data-id-form'=>'textDelete'.$category->productsCategoriesId]) !!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>
@@ -114,16 +121,16 @@
 <script src="{{ asset('assets/admin/js/pages/base_tables_datatables.js') }}"></script>
 <!-- Personalizing dataTable -->
 <script>
-jQuery(function(){
-    jQuery('.js-dataTable-full').dataTable({
-        order: [[0, 'asc']],
-        columnDefs: [ { orderable: false, targets: 'sorting-none' } ],
-        pageLength: 20,
-        lengthMenu: [[25, 50, 100, 500], [25, 50, 100, 500]],
-        language: {
-            'url': '<?php echo asset('assets/json/dataTablesPT-BR.json'); ?>'
-        }
+    jQuery(function(){
+        jQuery('.js-dataTable-full').dataTable({
+            order: [[0, 'asc']],
+            columnDefs: [ { orderable: false, targets: 'sorting-none' } ],
+            pageLength: 20,
+            lengthMenu: [[25, 50, 100, 500], [25, 50, 100, 500]],
+            language: {
+                'url': '<?php echo asset('assets/json/dataTablesPT-BR.json'); ?>'
+            }
+        });
     });
-});
 </script>
 @stop

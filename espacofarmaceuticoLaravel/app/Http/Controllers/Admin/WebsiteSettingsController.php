@@ -26,7 +26,7 @@ class WebsiteSettingsController extends Controller
     public $appleTouchIconHeight;
 
     public function __construct(){
-        $this->folder               = "assets/images/_upload/dados-do-site/";
+        $this->folder               = "assets/images/_upload/websiteSettings/";
         $this->websiteSettingsId    = 1;
         $this->faviconWidth         = 48;
         $this->faviconHeight        = 48;
@@ -65,38 +65,34 @@ class WebsiteSettingsController extends Controller
         }
 
         $this->validate($request, [
-            'title'         => 'required|max:50',
-            'email'         => 'required|email|max:50',
-            'certificate'   => 'required',
-            'callText'      => 'required',
-            'buttonText'    => 'required',
-            'buttonUrl'     => 'required'
+            'title'                 => 'required|max:50',
+            'costumerServicePhone'  => 'required',
+            'address'               => 'required',
+            'email'                 => 'required|email|max:50'
         ],
         [
-            'title.required'        => 'Informe o título do site',
-            'title.max'             => 'O título do site não pode ter mais de :max caracteres',
-            'certificate.required'  => 'Informe o certificado da CAIXA',
-            'callText.required'     => 'Informe o texto da chamada para a home',
-            'buttonText.required'   => 'Informe o texto do botão',
-            'buttonUrl.required'    => 'Informe a URL do botão'
+            'title.required'                => 'Informe o título do site',
+            'title.max'                     => 'O título do site não pode ter mais de :max caracteres',
+            'costumerServicePhone.required' => 'Informe o telefone SAC',
+            'address.required'              => 'Informe o endereço',
+            'email.required'                => 'Informe o e-mail padrão do website',
+            'email.email'                   => 'Informe um e-mail válido',
+            'email.email'                   => 'O e-mail não pode passar de :max caracteres'
         ]);
 
         $websiteSettings = WebsiteSettings::find($this->websiteSettingsId);
-        $websiteSettings->title             = $request->title;
-        $websiteSettings->email             = $request->email;
-        $websiteSettings->certificate       = $request->certificate;
-        $websiteSettings->callText          = $request->callText;
-        $websiteSettings->buttonText        = $request->buttonText;
-        $websiteSettings->buttonUrl         = $request->buttonUrl;
-        $websiteSettings->facebook          = $request->facebook;
-        $websiteSettings->instagram         = $request->instagram;
-        $websiteSettings->twitter           = $request->twitter;
-        $websiteSettings->youtube           = $request->youtube;
-        $websiteSettings->googleAnalytics   = $request->googleAnalytics;
-        $websiteSettings->websiteOk         = $request->websiteOk;
-        $websiteSettings->registerOk        = $request->registerOk;
-        $websiteSettings->votingOk          = $request->votingOk;
-        $websiteSettings->winnersOk         = $request->winnersOk;
+        $websiteSettings->title                 = $request->title;
+        $websiteSettings->costumerServicePhone  = $request->costumerServicePhone;
+        $websiteSettings->phone                 = $request->phone;
+        $websiteSettings->address               = $request->address;
+        $websiteSettings->email                 = $request->email;
+        $websiteSettings->facebook              = $request->facebook;
+        $websiteSettings->twitter               = $request->twitter;
+        $websiteSettings->youtube               = $request->youtube;
+        $websiteSettings->instagram             = $request->instagram;
+        $websiteSettings->linkedin              = $request->linkedin;
+        $websiteSettings->googleAnalytics       = $request->googleAnalytics;
+        $websiteSettings->websiteOk             = $request->websiteOk;
 
         if ($request->favicon) {
             //DELETE OLD FAVICON

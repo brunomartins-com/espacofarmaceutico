@@ -5,11 +5,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use League\Flysystem\Filesystem;
 
 use App\Banners;
 
@@ -21,8 +18,8 @@ class BannersController extends Controller
 
     public function __construct(){
         $this->folder       = "assets/images/_upload/banners/";
-        $this->imageWidth   = 825;
-        $this->imageHeight  = 675;
+        $this->imageWidth   = 700;
+        $this->imageHeight  = 812;
     }
 
     public function getIndex()
@@ -60,22 +57,39 @@ class BannersController extends Controller
 
         $this->validate($request, [
             'title'         => 'required|max:45',
-            'image'         => 'required|image|mimes:png'
+            'image'         => 'required|image|mimes:jpeg,gif,png'
         ],
         [
             'title.required'=> 'Informe o título do banner',
             'title.max'     => 'O título do banner não pode passar de :max caracteres',
+            'image.required'=> 'Envie uma imagem para o banner',
             'image.image'   => 'Envie um formato de imagem válida',
-            'image.mimes'   => 'Formato suportado: .png com fundo transparente'
+            'image.mimes'   => 'Formatos suportados: .jpg, .gif e .png'
         ]);
 
         $banner = new Banners();
         $banner->title = $request->title;
+        $banner->subtitle = $request->subtitle;
+        if(!empty($request->url)){
+            $banner->url = $request->url;
+            if(!empty($request->target)){
+                $banner->target = $request->target;
+            }else{
+                $banner->target = "_self";
+            }
+        }else{
+            $banner->url = "";
+            $banner->target = "";
+        }
+
         //IMAGE
         $extension = $request->image->getClientOriginalExtension();
         $nameImage = Carbon::now()->format('YmdHis').".".$extension;
-        Image::make($request->file('image'))->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
-
+        $image = Image::make($request->file('image'));
+        if($request->imageCropAreaW > 0 or $request->imageCropAreaH > 0 or $request->imagePositionX or $request->imagePositionY){
+            $image->crop($request->imageCropAreaW, $request->imageCropAreaH, $request->imagePositionX, $request->imagePositionY);
+        }
+        $image->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
         $banner->image = $nameImage;
 
         $banner->save();
@@ -110,17 +124,29 @@ class BannersController extends Controller
 
         $this->validate($request, [
             'title'         => 'required|max:45',
-            'image'         => 'image|mimes:png'
+            'image'         => 'image|mimes:jpeg,gif,png'
         ],
         [
             'title.required'=> 'Informe o título do banner',
             'title.max'     => 'O título do banner não pode passar de :max caracteres',
             'image.image'   => 'Envie um formato de imagem válida',
-            'image.mimes'   => 'Formato suportado: .png com fundo transparente'
+            'image.mimes'   => 'Formatos suportados: .jpg, .gif e .png'
         ]);
 
         $banner = Banners::find($request->bannersId);
-        $banner->title         = $request->title;
+        $banner->title      = $request->title;
+        $banner->subtitle   = $request->subtitle;
+        if(!empty($request->url)){
+            $banner->url = $request->url;
+            if(!empty($request->target)){
+                $banner->target = $request->target;
+            }else{
+                $banner->target = "_self";
+            }
+        }else{
+            $banner->url = "";
+            $banner->target = "";
+        }
 
         if ($request->image) {
             //DELETE OLD IMAGE
@@ -129,10 +155,14 @@ class BannersController extends Controller
                     File::delete($this->folder.$request->currentImage);
                 }
             }
+            //IMAGE
             $extension = $request->image->getClientOriginalExtension();
             $nameImage = Carbon::now()->format('YmdHis').".".$extension;
-            Image::make($request->file('image'))->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
-
+            $image = Image::make($request->file('image'));
+            if($request->imageCropAreaW > 0 or $request->imageCropAreaH > 0 or $request->imagePositionX or $request->imagePositionY){
+                $image->crop($request->imageCropAreaW, $request->imageCropAreaH, $request->imagePositionX, $request->imagePositionY);
+            }
+            $image->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
             $banner->image = $nameImage;
         }
 

@@ -5,11 +5,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-use Illuminate\Support\MessageBag;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-use League\Flysystem\Filesystem;
 
 use App\Calls;
 
@@ -20,9 +17,9 @@ class CallsController extends Controller
     public $imageHeight;
 
     public function __construct(){
-        $this->folder       = "assets/images/_upload/chamadas/";
-        $this->imageWidth   = 227;
-        $this->imageHeight  = 150;
+        $this->folder       = "assets/images/_upload/calls/";
+        $this->imageWidth   = 353;
+        $this->imageHeight  = 200;
     }
 
     public function getIndex()
@@ -60,35 +57,37 @@ class CallsController extends Controller
 
         $this->validate($request, [
             'title'         => 'required|max:45',
-            'text'          => 'required',
-            'warning'       => 'max:40',
-            'image'         => 'required|image|mimes:png'
+            'image'         => 'required|image|mimes:jpeg,gif,png'
         ],
         [
             'title.required'=> 'Informe o título da chamada',
             'title.max'     => 'O título da chamada não pode passar de :max caracteres',
-            'warning.max'   => 'O aviso da chamada não pode passar de :max caracteres',
-            'image.required'=> 'Informe a imagem para upload',
+            'image.required'=> 'Envie uma imagem para a chamada',
             'image.image'   => 'Envie um formato de imagem válida',
-            'image.mimes'   => 'Formato suportado: .png com fundo transparente'
+            'image.mimes'   => 'Formatos suportados: .jpg, .gif e .png'
         ]);
 
         $calls = new Calls();
         $calls->title       = $request->title;
-        $calls->text        = $request->text;
-        $calls->warning     = $request->warning;
-        if(!empty($request->url)) {
-            $calls->url     = $request->url;
-            $calls->target  = $request->target;
+        if(!empty($request->url)){
+            $calls->url = $request->url;
+            if(!empty($request->target)){
+                $calls->target = $request->target;
+            }else{
+                $calls->target = "_self";
+            }
         }else{
-            $calls->url     = "";
-            $calls->target  = "";
+            $calls->url = "";
+            $calls->target = "";
         }
         //IMAGE
         $extension = $request->image->getClientOriginalExtension();
         $nameImage = Carbon::now()->format('YmdHis').".".$extension;
-        Image::make($request->file('image'))->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
-
+        $image = Image::make($request->file('image'));
+        if($request->imageCropAreaW > 0 or $request->imageCropAreaH > 0 or $request->imagePositionX or $request->imagePositionY){
+            $image->crop($request->imageCropAreaW, $request->imageCropAreaH, $request->imagePositionX, $request->imagePositionY);
+        }
+        $image->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
         $calls->image = $nameImage;
 
         $calls->save();
@@ -123,27 +122,26 @@ class CallsController extends Controller
 
         $this->validate($request, [
             'title'         => 'required|max:45',
-            'text'          => 'required',
-            'warning'       => 'max:40',
-            'image'         => 'image|mimes:png'
+            'image'         => 'image|mimes:jpeg,gif,png'
         ],
         [
             'title.required'=> 'Informe o título da chamada',
             'title.max'     => 'O título da chamada não pode passar de :max caracteres',
-            'warning.max'   => 'O aviso da chamada não pode passar de :max caracteres',
             'image.image'   => 'Envie um formato de imagem válida',
-            'image.mimes'   => 'Formato suportado: .png com fundo transparente'
+            'image.mimes'   => 'Formatos suportados: .jpg, .gif e .png'
         ]);
 
         $calls = Calls::find($request->callsId);
         $calls->title       = $request->title;
-        $calls->text        = $request->text;
-        $calls->warning     = $request->warning;
-        if(!empty($request->url)) {
-            $calls->url     = $request->url;
-            $calls->target  = $request->target;
+        if(!empty($request->url)){
+            $calls->url = $request->url;
+            if(!empty($request->target)){
+                $calls->target = $request->target;
+            }else{
+                $calls->target = "_self";
+            }
         }else{
-            $calls->url    = "";
+            $calls->url = "";
             $calls->target = "";
         }
 
@@ -154,10 +152,14 @@ class CallsController extends Controller
                     File::delete($this->folder.$request->currentImage);
                 }
             }
+            //IMAGE
             $extension = $request->image->getClientOriginalExtension();
             $nameImage = Carbon::now()->format('YmdHis').".".$extension;
-            Image::make($request->file('image'))->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
-
+            $image = Image::make($request->file('image'));
+            if($request->imageCropAreaW > 0 or $request->imageCropAreaH > 0 or $request->imagePositionX or $request->imagePositionY){
+                $image->crop($request->imageCropAreaW, $request->imageCropAreaH, $request->imagePositionX, $request->imagePositionY);
+            }
+            $image->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
             $calls->image = $nameImage;
         }
 

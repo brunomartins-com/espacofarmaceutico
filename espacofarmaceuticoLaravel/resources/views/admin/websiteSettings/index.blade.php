@@ -1,6 +1,6 @@
 @extends('admin.sidebar-template')
 
-@section('title', 'Website Settings | ')
+@section('title', 'Dados do Site | ')
 
 @section('page-content')
 @parent
@@ -28,7 +28,7 @@
     <div class="content">
         <!-- Dynamic Table Full -->
         <div class="block">
-            <div class="block-header bg-primary-darker text-white">
+            <div class="block-header bg-gray-darker text-white">
                 <ul class="block-options">
                     <li>
                         <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
@@ -70,43 +70,34 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+                            <div class="form-input">
+                                {!! Form::label('costumerServicePhone', 'Telefone SAC *') !!}
+                                {!! Form::text('costumerServicePhone', $websiteSettings->costumerServicePhone, ['class'=>'form-control', 'id'=>'costumerServicePhone', 'maxlength'=>30]) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-4 col-md-6 col-sm-8 col-xs-10">
+                            <div class="form-input">
+                                {!! Form::label('phone', 'Telefone') !!}
+                                {!! Form::text('phone', $websiteSettings->phone, ['class'=>'form-control', 'id'=>'phone', 'maxlength'=>30]) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                            <div class="form-input">
+                                {!! Form::label('address', 'Endereço *') !!}
+                                {!! Form::text('address', $websiteSettings->address, ['class'=>'form-control', 'id'=>'address', 'maxlength'=>200]) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                             <div class="form-input">
                                 {!! Form::label('email', 'E-mail *') !!}
                                 {!! Form::text('email', $websiteSettings->email, ['class'=>'form-control', 'id'=>'email', 'maxlength'=>50]) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('certificate', 'Certificado *') !!}
-                                {!! Form::textarea('certificate', $websiteSettings->certificate, ['class'=>'form-control', 'rows'=>5, 'id'=>'certificate']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <br /><br />
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('callText', 'Texto Chamada Home *') !!}
-                                {!! Form::textarea('callText', $websiteSettings->callText, ['class'=>'form-control', 'rows'=>5, 'id'=>'callText']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('buttonText', 'Texto Botão Home *') !!}
-                                {!! Form::text('buttonText', $websiteSettings->buttonText, ['class'=>'form-control', 'id'=>'buttonText', 'maxlength'=>45]) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('buttonUrl', 'URL Botão Home *') !!}
-                                {!! Form::text('buttonUrl', $websiteSettings->buttonUrl, ['class'=>'form-control', 'id'=>'buttonUrl', 'maxlength'=>255]) !!}
                             </div>
                         </div>
                     </div>
@@ -116,15 +107,7 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     {!! Form::label('facebook', 'Facebook') !!}
-                                    {!! Form::text('facebook', $websiteSettings->facebook, ['class'=>'form-control', 'id'=>'facebook', 'maxlength'=>50]) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    {!! Form::label('instagram', 'Instagram') !!}
-                                    {!! Form::text('instagram', $websiteSettings->instagram, ['class'=>'form-control', 'id'=>'instagram', 'maxlength'=>50]) !!}
+                                    {!! Form::text('facebook', $websiteSettings->facebook, ['class'=>'form-control', 'id'=>'facebook', 'maxlength'=>255]) !!}
                                 </div>
                             </div>
                         </div>
@@ -132,7 +115,7 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     {!! Form::label('twitter', 'Twitter') !!}
-                                    {!! Form::text('twitter', $websiteSettings->twitter, ['class'=>'form-control', 'id'=>'twitter', 'maxlength'=>50]) !!}
+                                    {!! Form::text('twitter', $websiteSettings->twitter, ['class'=>'form-control', 'id'=>'twitter', 'maxlength'=>255]) !!}
                                 </div>
                             </div>
                         </div>
@@ -140,7 +123,23 @@
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     {!! Form::label('youtube', 'Youtube') !!}
-                                    {!! Form::text('youtube', $websiteSettings->youtube, ['class'=>'form-control', 'id'=>'youtube', 'maxlength'=>50]) !!}
+                                    {!! Form::text('youtube', $websiteSettings->youtube, ['class'=>'form-control', 'id'=>'youtube', 'maxlength'=>255]) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    {!! Form::label('instagram', 'Instagram') !!}
+                                    {!! Form::text('instagram', $websiteSettings->instagram, ['class'=>'form-control', 'id'=>'instagram', 'maxlength'=>255]) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    {!! Form::label('linkedin', 'LinkedIn') !!}
+                                    {!! Form::text('linkedin', $websiteSettings->linkedin, ['class'=>'form-control', 'id'=>'linkedin', 'maxlength'=>255]) !!}
                                 </div>
                             </div>
                         </div>
@@ -235,33 +234,6 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('registerOk', 'Liberar Inscrições') !!}
-                                <label class="css-input switch switch-primary">
-                                    <input class="access" name="registerOk" id="registerOk" type="checkbox" value="1" @if($websiteSettings->registerOk == 1) checked @endif />
-                                    <span></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('votingOk', 'Liberar Votação') !!}
-                                <label class="css-input switch switch-primary">
-                                    <input class="access" name="votingOk" id="votingOk" type="checkbox" value="1" @if($websiteSettings->votingOk == 1) checked @endif />
-                                    <span></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('winnersOk', 'Liberar Vencedores') !!}
-                                <label class="css-input switch switch-primary">
-                                    <input class="access" name="winnersOk" id="winnersOk" type="checkbox" value="1" @if($websiteSettings->winnersOk == 1) checked @endif />
-                                    <span></span>
-                                </label>
-                            </div>
-                        </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-12 push-30-t">
@@ -302,24 +274,30 @@ $(function(){
             'title': {
                 required: true
             },
+            'costumerServicePhone': {
+                required: true
+            },
+            'address': {
+                required: true
+            },
             'email': {
                 required: true,
                 email: true
-            },
-            'certificate': {
-                required: true
             }
         },
         messages: {
             'title': {
                 required: 'Informe o título do site'
             },
+            'costumerServicePhone': {
+                required: 'Insira o telefone SAC'
+            },
+            'address': {
+                required: 'Insira o endereço'
+            },
             'email': {
                 required: 'Informe o e-mail padrão do site',
                 email: 'Informe um e-mail válido'
-            },
-            'certificate': {
-                required: 'Insira o certificado da CAIXA'
             }
         }
     });

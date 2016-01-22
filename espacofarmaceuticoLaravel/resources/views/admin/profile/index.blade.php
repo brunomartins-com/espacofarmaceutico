@@ -28,7 +28,7 @@
     <div class="content">
         <!-- Dynamic Table Full -->
         <div class="block">
-            <div class="block-header bg-primary-darker text-white">
+            <div class="block-header bg-gray-darker text-white">
                 <ul class="block-options">
                     <li>
                         <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>

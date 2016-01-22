@@ -5,7 +5,7 @@ h1.logo{ width:80%; height: 45px; float: left; text-indent: -99999px; background
 }
 .dataTable {
   thead{
-    th{ background-color: @black; color: @white; }
+    th{ background-color: lighten(@black, 20%); color: @white; }
   }
   tbody{
     .btn-xs, form{
@@ -37,4 +37,13 @@ table.dataTable thead > tr > th.text-center{ padding-left: 0; padding-right: 0; 
       }
     }
   }
+}
+.bg-orange{
+  background: @orange;
+}
+.text-orange{
+  color: lighten(@orange, 10%);
+}
+a.text-orange:hover{
+  color: @orange;
 }

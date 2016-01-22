@@ -6,7 +6,7 @@
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             <!-- Login Block -->
             <div class="block block-themed animated fadeIn">
-                <div class="block-header bg-primary">
+                <div class="block-header bg-orange">
                     <ul class="block-options">
                         <li>
                             <a href="{!! route('passwordEmail') !!}" title="Esqueceu sua senha?"><i class="si si-wrench"></i> Esqueceu sua senha?</a>
@@ -33,7 +33,7 @@
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <div class="form-material form-material-primary">
+                                <div class="form-material form-material-warning">
                                     <input class="form-control" type="text" placeholder="Informe seu e-mail" id="email" value="{{ old('email') }}" name="email">
                                     <label for="email">E-mail</label>
                                 </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <div class="form-material form-material-primary">
+                                <div class="form-material form-material-warning">
                                     <input class="form-control" type="password" placeholder="Informe sua senha" id="password" name="password">
                                     <label for="password">Senha</label>
                                 </div>
@@ -50,7 +50,7 @@
 
                          <div class="form-group">
                              <div class="col-xs-12">
-                                 <label class="css-input switch switch-sm switch-primary">
+                                 <label class="css-input switch switch-sm switch-warning">
                                      <input type="checkbox" id="remember" name="remember"><span></span> Lembrar Dados?
                                  </label>
                              </div>
@@ -58,7 +58,7 @@
 
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-6 col-md-4">
-                                <button class="btn btn-block btn-primary" type="submit"><i class="si si-login"></i>Entrar</button>
+                                <button class="btn btn-block btn-warning" type="submit"><i class="si si-login"></i>Entrar</button>
                             </div>
                         </div>
                     </form><!-- END Login Form -->

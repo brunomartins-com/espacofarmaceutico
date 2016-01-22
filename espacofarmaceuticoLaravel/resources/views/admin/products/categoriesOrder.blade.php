@@ -1,23 +1,30 @@
 @extends('admin.sidebar-template')
 
-@section('title', 'Ordenar Produtos | ')
+@section('title', 'Ordenar Categorias (Produtos) | ')
+
+@section('head')
+@parent
+        <!-- Page JS Plugins CSS -->
+<link rel="stylesheet" href="{{ asset('assets/admin/js/plugins/datatables/jquery.dataTables.min.css') }}">
+@stop
 
 @section('page-content')
 @parent
-<!-- Main Container -->
+        <!-- Main Container -->
 <main id="main-container">
     <!-- Page Header -->
     <div class="content bg-gray-lighter">
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Produtos <small></small>
+                    Categorias <small></small>
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Produtos</li>
-                    <li>Editar Ordem</li>
+                    <li><a href="{{ route('products') }}" class="text-orange" title="Produtos">Produtos</a></li>
+                    <li><a href="{{ route('productsCategories') }}" class="text-orange" title="Categorias">Categorias</a></li>
+                    <li>Ordenar</li>
                 </ol>
             </div>
         </div>
@@ -28,20 +35,20 @@
     <div class="content">
         <!-- Dynamic Table Full -->
         <div class="block">
-            <div class="block-header bg-primary-darker text-white">
+            <div class="block-header bg-gray-darker text-white">
                 <ul class="block-options">
                     <li>
-                        <button type="button" class="btn-back" data-url="{{ route('products') }}"><i class="si si-action-undo"></i></button>
+                        <button type="button" class="btn-back" data-url="{{ route('productsCategories') }}"><i class="si si-action-undo"></i></button>
                     </li>
                     <li>
                         <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
                     </li>
                 </ul>
-                <h3 class="block-title">Editar Ordem</h3>
+                <h3 class="block-title">Ordenar</h3>
             </div>
             <div class="block-content">
                 <div class="block-content block-content-full">
-                    <div class="alert alert-info alert-dismissable hidden">
+                    <div class="alert alert-warning alert-dismissable hidden">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <span></span>
                     </div>
@@ -54,26 +61,26 @@
                                 'class' => 'form-horizontal'
                                 ])
                             !!}
-                            {!! Form::hidden('databaseTable', 'products') !!}
-                            {!! Form::hidden('primaryKey', 'productsId') !!}
+                            {!! Form::hidden('databaseTable', 'productsCategories') !!}
+                            {!! Form::hidden('primaryKey', 'productsCategoriesId') !!}
                             {!! Form::hidden('sortorder', '') !!}
-                            @foreach($products as $product)
+                            @foreach($categories as $category)
                             <!-- Block -->
-                            <div class="block draggable-item" title="{{ $product->productsId }}">
+                            <div class="block draggable-item" title="{{ $category->productsCategoriesId }}">
                                 <div class="block-header">
                                     <ul class="block-options">
                                         <li>
                                             <span class="draggable-handler text-gray"><i class="si si-cursor-move"></i></span>
                                         </li>
                                     </ul>
-                                    <h3 class="block-title">{{ $product->title }}</h3>
+                                    <h3 class="block-title">{{ $category->productsCategoriesName }}</h3>
                                 </div>
                             </div>
                             <!-- END Block -->
                             @endforeach
                             <div class="form-group">
                                 <div class="col-xs-12 push-30-t">
-                                    {!! Form::button('Concluir', ['class'=>'btn btn-primary btn-back pull-left', 'data-url'=>route('products')]) !!}
+                                    {!! Form::button('Concluído', ['class'=>'btn btn-primary btn-back pull-left', 'data-url'=>route('productsCategories')]) !!}
                                 </div>
                             </div>
                             {!! Form::close() !!}

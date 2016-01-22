@@ -82,7 +82,7 @@ Route::group(['middleware' => 'web'], function() {
     ## RECOVERY PASSWORD
     Route::post('recuperar-senha', 'Auth\PasswordController@postEmail');
     Route::get('recuperar-senha/{token}', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@getResetWebsite']);
-    Route::post('recuperar-senha/nova', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postResetWebsite']);
+    Route::post('nova-senha', ['as' => 'passwordReset', 'uses' => 'Auth\PasswordController@postResetWebsite']);
 
     ## LOGIN WEBSITE
     Route::get('login', function () {
@@ -114,7 +114,7 @@ Route::group(['middleware' => 'web'], function() {
         Route::get('eventos/{type}', 'Website\EventsController@index');
 
         ## SEU NEGOCIO MAIS LUCRATIVO
-        Route::get('seu-negocio-mais-lucrativo', 'Website\YouBusinessMoreLucrativeController@index');
+        Route::get('seu-negocio-mais-lucrativo', 'Website\YourBusinessMoreLucrativeController@index');
 
         ## INSTITUTO BULLA
         Route::get('instituto-bulla', 'Website\BullaInstituteController@index');
@@ -145,20 +145,6 @@ Route::group(['middleware' => 'web'], function() {
 
         ## HOME
         Route::get('home', ['as' => 'home', 'uses' => 'Admin\HomeController@home']);
-
-        ## PHOTOS
-        Route::get('fotos', ['as' => 'photos', 'uses' => 'Admin\PhotosController@getIndex']);
-        Route::put('fotos/status', ['as' => 'photosStatus', 'uses' => 'Admin\PhotosController@putStatus']);
-        Route::get('fotos/finalista/{photosId?}', ['as' => 'photosFinalist', 'uses' => 'Admin\PhotosController@getFinalist']);
-        Route::put('fotos/finalista', ['as' => 'photosEdit', 'uses' => 'Admin\PhotosController@putEdit']);
-        Route::delete('fotos/excluir', ['as' => 'photosDelete', 'uses' => 'Admin\PhotosController@delete']);
-
-        ## VIDEOS
-        Route::get('videos', ['as' => 'videos', 'uses' => 'Admin\VideosController@getIndex']);
-        Route::put('videos/status', ['as' => 'videosStatus', 'uses' => 'Admin\VideosController@putStatus']);
-        Route::get('videos/finalista/{videosId?}', ['as' => 'videosFinalist', 'uses' => 'Admin\VideosController@getFinalist']);
-        Route::put('videos/finalista', ['as' => 'videosEdit', 'uses' => 'Admin\VideosController@putEdit']);
-        Route::delete('videos/excluir', ['as' => 'videosDelete', 'uses' => 'Admin\VideosController@delete']);
 
         ## PARTICIPANTS
         Route::get('participantes', ['as' => 'participants', 'uses' => 'Admin\ParticipantsController@getIndex']);
@@ -214,8 +200,15 @@ Route::group(['middleware' => 'web'], function() {
         Route::post('produtos/adicionar', ['as' => 'productsAdd', 'uses' => 'Admin\ProductsController@postAdd']);
         Route::get('produtos/editar/{productsId?}', ['as' => 'productsEdit', 'uses' => 'Admin\ProductsController@getEdit']);
         Route::put('produtos/editar', ['as' => 'productsEditPut', 'uses' => 'Admin\ProductsController@putEdit']);
-        Route::get('produtos/ordenar', ['as' => 'productsOrder', 'uses' => 'Admin\ProductsController@getOrder']);
         Route::delete('produtos/excluir', ['as' => 'productsDelete', 'uses' => 'Admin\ProductsController@delete']);
+        ## PRODUCTS CATEGORIES
+        Route::get('produtos/categorias', ['as' => 'productsCategories', 'uses' => 'Admin\ProductsController@getCategories']);
+        Route::get('produtos/categorias/adicionar', ['as' => 'productsCategoriesAdd', 'uses' => 'Admin\ProductsController@getCategoriesAdd']);
+        Route::post('produtos/categorias/adicionar', ['as' => 'productsCategoriesAdd', 'uses' => 'Admin\ProductsController@postCategoriesAdd']);
+        Route::get('produtos/categorias/editar/{productsCategoriesId}', ['as' => 'productsCategoriesEdit', 'uses' => 'Admin\ProductsController@getCategoriesEdit']);
+        Route::put('produtos/categorias/editar', ['as' => 'productsCategoriesEditPut', 'uses' => 'Admin\ProductsController@putCategoriesEdit']);
+        Route::get('produtos/categorias/ordenar', ['as' => 'productsCategoriesOrder', 'uses' => 'Admin\ProductsController@getCategoriesOrder']);
+        Route::put('produtos/categorias/excluir', ['as' => 'productsCategoriesDelete', 'uses' => 'Admin\ProductsController@deleteCategories']);
 
         ## WINNERS
         Route::get('vencedores', ['as' => 'winners', 'uses' => 'Admin\WinnersController@getIndex']);

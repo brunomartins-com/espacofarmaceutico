@@ -1,6 +1,6 @@
 @extends('admin.sidebar-template')
 
-@section('title', 'Adicionar Usuário | ')
+@section('title', 'Adicionar Categoria (Produtos) | ')
 
 @section('page-content')
 @parent
@@ -11,12 +11,13 @@
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Usuários <small></small>
+                    Categorias <small></small>
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li><a href="{{ route('users') }}" class="text-orange" title="Usuários">Usuários</a></li>
+                    <li><a href="{{ route('products') }}" class="text-orange" title="Produtos">Produtos</a></li>
+                    <li><a href="{{ route('productsCategories') }}" class="text-orange" title="Categorias">Categorias</a></li>
                     <li>Adicionar</li>
                 </ol>
             </div>
@@ -31,7 +32,7 @@
             <div class="block-header bg-gray-darker text-white">
                 <ul class="block-options">
                     <li>
-                        <button type="button" class="btn-back" data-url="{{ route('users') }}"><i class="si si-action-undo"></i></button>
+                        <button type="button" class="btn-back" data-url="{{ route('productsCategories') }}"><i class="si si-action-undo"></i></button>
                     </li>
                     <li>
                         <button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i class="si si-size-fullscreen"></i></button>
@@ -48,47 +49,29 @@
                     @endforeach
                 </div>
                 @endif
-                <!-- .block-content -->
+                        <!-- .block-content -->
                 <div class="block-content block-content-full">
                     {!! Form::open([
-                            'id' => 'users',
-                            'method' => 'post',
-                            'class' => 'form-horizontal push-20-t',
-                            'enctype' => 'multipart/form-data',
-                            'url' => route('usersAdd')
-                            ])
+                        'id' => 'categories',
+                        'method' => 'post',
+                        'class' => 'form-horizontal push-20-t',
+                        'enctype' => 'multipart/form-data',
+                        'url' => route('productsCategoriesAdd')
+                        ])
                     !!}
-                    {!! Form::hidden('type', 0) !!}
-                    {!! Form::hidden('active', 1) !!}
                     <div class="form-group">
                         <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                             <div class="form-input">
-                                {!! Form::label('name', 'Nome *') !!}
-                                {!! Form::text('name', '', ['class'=>'form-control', 'id'=>'name', 'maxlength'=>50]) !!}
+                                {!! Form::label('productsCategoriesName', 'Nome Categoria *') !!}
+                                {!! Form::text('productsCategoriesName', '', ['class'=>'form-control', 'id'=>'productsCategoriesName', 'maxlength'=>100]) !!}
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
                             <div class="form-input">
-                                {!! Form::label('email', 'E-mail *') !!}
-                                {!! Form::text('email', '', ['class'=>'form-control', 'id'=>'email', 'maxlength'=>50]) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('password', 'Senha *') !!}
-                                <input name="password" id="password" type="password" class="form-control" maxlength="12" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('password_confirmation', 'Confirma Senha *') !!}
-                                <input name="password_confirmation" id="password_confirmation" type="password" class="form-control" maxlength="12" />
+                                {!! Form::label('type', 'Categoria *') !!}
+                                {!! Form::select('type', [''=>'Escolha...', '0'=>'Categoria', '1'=>'Página'], '', ['id'=>'type', 'class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -110,7 +93,7 @@
 
 @section('javascript')
 @parent
-<script type="application/javascript">
+<script>
 $(function(){
     $('.form-horizontal').validate({
         errorClass: 'help-block text-right animated fadeInDown',
@@ -128,43 +111,19 @@ $(function(){
         },
         ignore: [],
         rules: {
-            'name': {
+            'productsCategoriesName': {
                 required: true
             },
-            'email': {
-                required: true,
-                email: true
-            },
-            'password': {
-                required: true,
-                minlength: 6,
-                maxlength: 12
-            },
-            'password_confirmation': {
-                required:true,
-                minlength: 6,
-                maxlength: 12,
-                equalTo:"#password"
+            'type': {
+                required: true
             }
         },
         messages: {
-            'name': {
-                required: 'Informe o nome do usuário'
+            'productsCategoriesName': {
+                required: 'Informe o nome da categoria'
             },
-            'email': {
-                required: 'Informe o e-mail do usuário',
-                email: 'Informe um e-mail válido'
-            },
-            'password': {
-                required	: "Informe a senha do usuário",
-                minlength	: "A senha deve conter de 6 a 12 caracteres",
-                maxlength	: "A senha deve conter de 6 a 12 caracteres"
-            },
-            'password_confirmation': {
-                required	: "Confirme a senha",
-                minlength	: "A senha deve conter de 6 a 12 caracteres",
-                maxlength	: "A senha deve conter de 6 a 12 caracteres",
-                equalTo		: "As senhas não conferem"
+            'type': {
+                required: 'Informe o tipo da categoria'
             }
         }
     });

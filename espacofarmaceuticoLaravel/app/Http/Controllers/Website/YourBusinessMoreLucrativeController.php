@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Texts;
 use App\Pages;
 
-class YouBusinessMoreLucrativeController extends Controller
+class YourBusinessMoreLucrativeController extends Controller
 {
     public function index()
     {
@@ -17,6 +17,6 @@ class YouBusinessMoreLucrativeController extends Controller
 
         $text = Texts::find(18);
 
-        return view('website.youBusinessMoreLucrative.index')->with(compact('page', 'pages', 'websiteSettings', 'text'));
+        return view('website.yourBusinessMoreLucrative.index')->with(compact('page', 'pages', 'websiteSettings', 'text'));
     }
 }

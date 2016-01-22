@@ -164,7 +164,7 @@ Contact: hello@brunomartins.com
                 'method' => 'post',
                 'class' => 'form-horizontal',
                 'enctype' => 'multipart/form-data',
-                'url' => url('meus-dados')
+                'url' => url('recuperar-senha')
                 ])
             !!}
             <h3 class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-0 col-sm-4 col-xs-12">Informe seu e-mail para a recuperação do seu acesso.</h3>

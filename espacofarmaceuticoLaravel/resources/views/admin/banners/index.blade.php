@@ -75,23 +75,23 @@
                         <tr>
                             <td>{{ $banner->bannersId }}</td>
                             <td class="font-w600">{{ $banner->title }}</td>
-                            <td><img src="/{{ $imageDetails['folder'].$banner->image }}" height="100" alt="{{ $banner->title }}" /></td>
+                            <td width="100"><img src="/{{ $imageDetails['folder'].$banner->image }}" width="100" alt="{{ $banner->title }}" /></td>
                             <td class="text-center">
-                                    {!! Form::button('<i class="fa fa-pencil"></i>', ['title'=>'Editar', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-primary',
-                                    'onclick'=>'window.open(\''.route('bannersEdit', $banner->bannersId).'\', \'_self\')']) !!}
+                                {!! Form::button('<i class="fa fa-pencil"></i>', ['title'=>'Editar', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-primary',
+                                'onclick'=>'window.open(\''.route('bannersEdit', $banner->bannersId).'\', \'_self\')']) !!}
 
-                                    {!! Form::open([
-                                        'id' => 'textDelete'.$banner->bannersId,
-                                        'method' => 'delete',
-                                        'enctype' => 'multipart/form-data',
-                                        'url' => ''
-                                        ])
-                                    !!}
-                                    {!! Form::hidden('bannersId', $banner->bannersId) !!}
-                                    {!! Form::hidden('image', $banner->image) !!}
-                                    {!! Form::button('<i class="fa fa-trash"></i>', ['title'=>'Excluir', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-danger btn-delete',
-                                    'data-url'=>route('bannersDelete'), 'data-form'=>true, 'data-id-form'=>'textDelete'.$banner->bannersId]) !!}
-                                    {!! Form::close() !!}
+                                {!! Form::open([
+                                    'id' => 'textDelete'.$banner->bannersId,
+                                    'method' => 'delete',
+                                    'enctype' => 'multipart/form-data',
+                                    'url' => ''
+                                    ])
+                                !!}
+                                {!! Form::hidden('bannersId', $banner->bannersId) !!}
+                                {!! Form::hidden('image', $banner->image) !!}
+                                {!! Form::button('<i class="fa fa-trash"></i>', ['title'=>'Excluir', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-danger btn-delete',
+                                'data-url'=>route('bannersDelete'), 'data-form'=>true, 'data-id-form'=>'textDelete'.$banner->bannersId]) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                     @endforeach
@@ -118,7 +118,8 @@
         jQuery('.js-dataTable-full').dataTable({
             order: [[0, 'asc']],
             columnDefs: [ { orderable: false, targets: 'sorting-none' } ],
-            bPaginate: false,
+            pageLength: 20,
+            lengthMenu: [[25, 50, 100, 500], [25, 50, 100, 500]],
             language: {
                 'url': '<?php echo asset('assets/json/dataTablesPT-BR.json'); ?>'
             }

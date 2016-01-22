@@ -16,7 +16,7 @@
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li><a href="{{ route('pages') }}" title="Páginas">Páginas</a></li>
+                    <li><a href="{{ route('pages') }}" class="text-orange" title="Páginas">Páginas</a></li>
                     <li>{{ $page->title }}</li>
                     <li>Editar</li>
                 </ol>
@@ -29,7 +29,7 @@
     <div class="content">
         <!-- Dynamic Table Full -->
         <div class="block">
-            <div class="block-header bg-primary-darker text-white">
+            <div class="block-header bg-gray-darker text-white">
                 <ul class="block-options">
                     <li>
                         <button type="button" class="btn-back" data-url="{{ route('pages') }}"><i class="si si-action-undo"></i></button>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-input">
                                 {!! Form::label('description', 'Descrição *') !!}
                                 {!! Form::text('description', $page->description, ['class'=>'form-control', 'id'=>'description', 'maxlength'=>200]) !!}

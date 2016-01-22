@@ -42,7 +42,7 @@
                     </li>
                 </ul>
                 <h3 class="block-title">
-                    {!! Form::button('<i class="fa fa-share-square"></i> Exportar', ['class'=>'btn btn-info', 'onclick'=>'window.open(\''.route('newsletterExport').'\', \'_self\');']) !!}
+                    {!! Form::button('<i class="fa fa-share-square"></i> Exportar', ['class'=>'btn btn-warning', 'onclick'=>'window.open(\''.route('newsletterExport').'\', \'_self\');']) !!}
                 </h3>
             </div>
             <div class="block-content">

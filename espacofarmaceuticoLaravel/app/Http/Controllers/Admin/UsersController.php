@@ -63,7 +63,7 @@ class UsersController extends Controller
         $user = new User();
         $user->name     = $request->name;
         $user->email    = $request->email;
-        $user->password = bcrypt($request->password);
+        $user->password = md5($request->password);
         $user->type     = $request->type;
         $user->active   = $request->active;
 
@@ -117,7 +117,7 @@ class UsersController extends Controller
         $user->name     = $request->name;
         $user->email    = $request->email;
         if(!empty($request->password)){
-            $user->password = bcrypt($request->password);
+            $user->password = md5($request->password);
         }
         $user->save();
 

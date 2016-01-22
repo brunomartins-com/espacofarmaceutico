@@ -220,6 +220,11 @@ body{
         font-size: 16px;
         font-weight: 600;
         color: $white;
+        &.error{
+          display: block;
+          font-size: 12px;
+          font-weight: normal;
+        }
       }
       input{
         height: 38px;

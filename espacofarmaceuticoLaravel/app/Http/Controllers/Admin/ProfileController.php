@@ -51,7 +51,7 @@ class ProfileController extends Controller
         $user->name     = $request->name;
         $user->email    = $request->email;
         if(!empty($request->password)){
-            $user->password = bcrypt($request->password);
+            $user->password = md5($request->password);
         }
         $user->save();
 

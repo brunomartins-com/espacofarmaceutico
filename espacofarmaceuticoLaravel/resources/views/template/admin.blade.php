@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>@yield('title') Concurso Bebê Hipoderme 12ª Edição</title>
+    <title>@yield('title') Espaço Farmacêutico - Teuto/Pfizer</title>
 
     <meta name="robots" content="noindex, nofollow">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">

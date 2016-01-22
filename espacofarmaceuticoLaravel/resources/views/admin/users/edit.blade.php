@@ -16,7 +16,7 @@
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li><a href="{{ route('users') }}" title="Usuários">Usuários</a></li>
+                    <li><a href="{{ route('users') }}" class="text-orange" title="Usuários">Usuários</a></li>
                     <li>{{ $user->name }}</li>
                     <li>Editar</li>
                 </ol>
@@ -29,7 +29,7 @@
     <div class="content">
         <!-- Dynamic Table Full -->
         <div class="block">
-            <div class="block-header bg-primary-darker text-white">
+            <div class="block-header bg-gray-darker text-white">
                 <ul class="block-options">
                     <li>
                         <button type="button" class="btn-back" data-url="{{ route('users') }}"><i class="si si-action-undo"></i></button>

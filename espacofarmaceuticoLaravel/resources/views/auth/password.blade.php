@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             <div class="block block-themed animated fadeIn">
-                <div class="block-header bg-primary">
+                <div class="block-header bg-orange">
                     <ul class="block-options">
                         <li>
                             <a href="{!! route('login') !!}"  title="Entrar"><i class="si si-login"></i> Entrar</a>
@@ -14,10 +14,10 @@
                     <h3 class="block-title">Recuperar Senha</h3>
                 </div>
                 <div class="block-content block-content-full block-content-narrow">
-                    <img src="{{ asset('assets/admin/img/logoLogin.png') }}" alt="Concurso Bebê Hipoderme - 12ª Edição" class="center-block" width="80%" />
+                    <img src="{{ asset('assets/admin/img/logoLogin.png') }}" alt="Espaço Farmacêutico - Teuto/Pfizer" class="center-block" width="80%" />
 
                     @if (session('status'))
-                        <div class="alert alert-primary">
+                        <div class="alert alert-warning">
                             {{ session('status') }}
                         </div>
                     @endif
@@ -37,7 +37,7 @@
                         {!! csrf_field() !!}
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <div class="form-material form-material-primary">
+                                <div class="form-material form-material-warning">
                                     <input class="form-control" type="text" placeholder="Informe seu e-mail" id="email" value="{{ old('email') }}" name="email">
                                     <label for="email">E-mail</label>
                                 </div>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12 col-sm-6 col-md-5">
-                                <button class="btn btn-block btn-primary" type="submit"><i class="si si-envelope-open"></i> Enviar E-mail</button>
+                                <button class="btn btn-block btn-warning" type="submit"><i class="si si-envelope-open"></i> Enviar E-mail</button>
                             </div>
                         </div>
                     </form><!-- END Forgot Form -->
