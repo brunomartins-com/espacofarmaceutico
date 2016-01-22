@@ -168,17 +168,9 @@ Route::group(['middleware' => 'web'], function() {
         Route::put('chamadas/editar', ['as' => 'callsEditPut', 'uses' => 'Admin\CallsController@putEdit']);
         Route::delete('chamadas/excluir', ['as' => 'callsDelete', 'uses' => 'Admin\CallsController@delete']);
 
-        ## ADVERTISING
-        Route::get('propagandas', ['as' => 'advertising', 'uses' => 'Admin\AdvertisingController@getIndex']);
-        Route::get('propagandas/adicionar', ['as' => 'advertisingAdd', 'uses' => 'Admin\AdvertisingController@getAdd']);
-        Route::post('propagandas/adicionar', ['as' => 'advertisingAdd', 'uses' => 'Admin\AdvertisingController@postAdd']);
-        Route::get('propagandas/editar/{bannersId?}', ['as' => 'advertisingEdit', 'uses' => 'Admin\AdvertisingController@getEdit']);
-        Route::put('propagandas/editar', ['as' => 'advertisingEditPut', 'uses' => 'Admin\AdvertisingController@putEdit']);
-        Route::delete('propagandas/excluir', ['as' => 'advertisingDelete', 'uses' => 'Admin\AdvertisingController@delete']);
-
-        ## THE COMPETITION
-        Route::get('o-concurso', ['as' => 'theCompetition', 'uses' => 'Admin\TheCompetitionController@getIndex']);
-        Route::put('o-concurso/editar', ['as' => 'theCompetitionPut', 'uses' => 'Admin\TheCompetitionController@putUpdate']);
+        ## THE TEUTO
+        Route::get('o-teuto', ['as' => 'theTeuto', 'uses' => 'Admin\TheTeutoController@getIndex']);
+        Route::put('o-teuto/editar', ['as' => 'theTeutoPut', 'uses' => 'Admin\TheTeutoController@putUpdate']);
 
         ## REGULATION
         Route::get('regulamento', ['as' => 'regulation', 'uses' => 'Admin\RegulationController@getIndex']);

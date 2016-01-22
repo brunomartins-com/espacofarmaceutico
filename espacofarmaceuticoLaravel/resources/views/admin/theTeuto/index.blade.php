@@ -1,6 +1,6 @@
 @extends('admin.sidebar-template')
 
-@section('title', 'Regulamento | ')
+@section('title', 'O Teuto | ')
 
 @section('page-content')
 @parent
@@ -11,12 +11,12 @@
         <div class="row items-push">
             <div class="col-sm-7">
                 <h1 class="page-heading">
-                    Regulamento <small></small>
+                    O Teuto <small></small>
                 </h1>
             </div>
             <div class="col-sm-5 text-right hidden-xs">
                 <ol class="breadcrumb push-10-t">
-                    <li>Regulamento</li>
+                    <li>O Teuto</li>
                     <li>Editar</li>
                 </ol>
             </div>
@@ -54,18 +54,18 @@
                 <!-- .block-content -->
                 <div class="block-content block-content-full">
                     {!! Form::open([
-                            'id' => 'profile',
+                            'id' => 'theTeuto',
                             'method' => 'put',
                             'class' => 'form-horizontal push-20-t',
                             'enctype' => 'multipart/form-data',
-                            'url' => route('regulationPut')
+                            'url' => route('theTeutoPut')
                             ])
                     !!}
                     <div class="form-group">
                         <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-input">
                                 {!! Form::label('text', 'Texto *') !!}
-                                {!! Form::textarea('text', $regulation->text, ['class'=>'form-control', 'id'=>'text']) !!}
+                                {!! Form::textarea('text', $texts->text, ['class'=>'form-control', 'id'=>'text']) !!}
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
 @section('javascript')
 @parent
 <script src="{{ asset('assets/admin/editor/ckeditor/ckeditor.js') }}"></script>
-<script type="application/javascript">
+<script>
 $(function(){
     //START CK EDITOR
     CKEDITOR.replace('text');
@@ -118,7 +118,7 @@ $(function(){
         },
         messages: {
             'text': {
-                required: 'Informe o texto do regulamento'
+                required: 'Informe o texto sobre O Teuto'
             }
         }
     });
