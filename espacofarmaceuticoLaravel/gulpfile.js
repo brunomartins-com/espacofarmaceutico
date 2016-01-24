@@ -50,7 +50,12 @@ elixir(function(mix) {
     mix.scripts(['../../../resources/assets/admin/js/app.js'], '../public_html/espacofarmaceutico/assets/admin/js/app.js');
     mix.scripts(['../../../resources/assets/admin/js/pages/base_tables_datatables.js'], '../public_html/espacofarmaceutico/assets/admin/js/pages/base_tables_datatables.js');
     mix.scripts(['../../../resources/assets/admin/js/plugins/datatables/jquery.dataTables.min.js'], '../public_html/espacofarmaceutico/assets/admin/js/plugins/datatables/jquery.dataTables.min.js');
+    mix.scripts(['../../../resources/assets/admin/js/plugins/datatables/jquery.dataUk.js'], '../public_html/espacofarmaceutico/assets/admin/js/plugins/datatables/jquery.dataUk.min.js');
     mix.scripts(['../../../resources/assets/admin/js/plugins/jquery-ui/jquery-ui.min.js'], '../public_html/espacofarmaceutico/assets/admin/js/plugins/jquery-ui/jquery-ui.min.js');
     mix.scripts(['../../../resources/assets/admin/js/core/sortorder.js'], '../public_html/espacofarmaceutico/assets/admin/js/sortorder.js');
+
+
+    mix.scripts(['../../../resources/assets/admin/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js'], '../public_html/espacofarmaceutico/assets/admin/js/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js');
+    mix.scripts(['../../../resources/assets/admin/js/plugins/masked-inputs/jquery.maskedinput.min.js'], '../public_html/espacofarmaceutico/assets/admin/js/plugins/masked-inputs/jquery.maskedinput.min.js');
 
 });

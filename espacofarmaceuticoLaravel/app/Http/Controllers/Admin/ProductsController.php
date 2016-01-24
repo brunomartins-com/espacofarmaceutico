@@ -14,6 +14,7 @@ use App\ProductsCategories;
 class ProductsController extends Controller
 {
     public $folder;
+    public $folderBull;
     public $imageWidth;
     public $imageHeight;
 

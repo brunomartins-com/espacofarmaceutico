@@ -23,8 +23,17 @@ class Authenticate
             } else {
                 return redirect()->guest('login');
             }
+        }else{
+            if(Auth::getUser() and Auth::getUser()->type == 1){
+                if(substr($request->path(), 0, 5) == 'admin'){
+                    return redirect('/');
+                }else{
+                    return $next($request);
+                }
+            }else{
+                return $next($request);
+            }
         }
-
-        return $next($request);
+        //return $next($request);
     }
 }

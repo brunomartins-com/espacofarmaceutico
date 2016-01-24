@@ -11,7 +11,7 @@ class ProfileController extends Controller
 {
     public function getIndex()
     {
-        if (! ACL::hasPermission('profile', 'edit')) {
+        if (! ACL::hasPermission('profile') and ! ACL::hasPermission('profile', 'edit')) {
             return redirect(route('profile'))->withErrors(['Você não tem permissão para editar seus dados.']);
         }
 

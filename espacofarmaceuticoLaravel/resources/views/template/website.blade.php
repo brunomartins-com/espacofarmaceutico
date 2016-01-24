@@ -1,5 +1,5 @@
 @if($websiteSettings['websiteOk'] == 0 and !Auth::check())
-{!! view('website.teaser')->with(compact('page', 'websiteSettings')) !!}
+{!! view('website.teaser.index')->with(compact('page', 'websiteSettings')) !!}
 {{ die }}
 @endif
 <!--
@@ -86,11 +86,11 @@ Contact: hello@brunomartins.com
         </div>
         <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
             <ul class="social-network">
-                <li><a href="https://www.facebook.com/espacofarmaceutico" target="_blank" class="facebook" title="Teuto no Facebook">Teuto no Facebook</a></li>
-                <li><a href="http://www.twitter.com/espfarmaceutico" target="_blank" class="twitter" title="Teuto no Twitter">Teuto no Twitter</a></li>
-                <li><a href="http://www.youtube.com/user/labteutopfizer" target="_blank" class="youtube" title="Teuto no LinkedIn">Teuto no YouTube</a></li>
-                <li><a href="http://www.instagram.com/labteuto" target="_blank" class="instagram" title="Teuto no Instagram">Teuto no Instagram</a></li>
-                <li><a href="http://www.linkedin.com/company/labteuto" target="_blank" class="linkedin" title="Teuto no LinkedIn">Teuto no LinkedIn</a></li>
+                <li><a href="{{ $websiteSettings['facebook'] }}" target="_blank" class="facebook" title="Teuto no Facebook">Teuto no Facebook</a></li>
+                <li><a href="{{ $websiteSettings['twitter'] }}" target="_blank" class="twitter" title="Teuto no Twitter">Teuto no Twitter</a></li>
+                <li><a href="{{ $websiteSettings['youtube'] }}" target="_blank" class="youtube" title="Teuto no LinkedIn">Teuto no YouTube</a></li>
+                <li><a href="{{ $websiteSettings['instagram'] }}" target="_blank" class="instagram" title="Teuto no Instagram">Teuto no Instagram</a></li>
+                <li><a href="{{ $websiteSettings['linkedin'] }}" target="_blank" class="linkedin" title="Teuto no LinkedIn">Teuto no LinkedIn</a></li>
             </ul>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2">
@@ -225,12 +225,12 @@ Contact: hello@brunomartins.com
             <li><a href="{{ url('o-teuto') }}" title="O Teuto">O Teuto</a></li>
             <li><a href="{{ url('medicamentos-genericos') }}" title="Medicamentos Genéricos">Medicamentos Genéricos</a></li>
             <li><a href="{{ url('produtos') }}" title="Produtos">Produtos</a></li>
-            <li><a href="{{ url('treinamentos') }}" title="Treinamentos">Treinamentos</a></li>
+            <!--<li><a href="{{ url('treinamentos') }}" title="Treinamentos">Treinamentos</a></li>-->
             <li><a href="{{ url('blog') }}" title="Blog">Blog</a></li>
             <li><a href="{{ url('noticias-e-releases') }}" title="Notícias e Releases">Notícias e Releases</a></li>
         </ul>
         <ul class="col-lg-2 col-md-2 col-sm-3 col-sm-offset-0 col-xs-5 remove-padding-r">
-            <li><a href="{{ url('artigos') }}" title="Artigos">Artigos</a></li>
+            <!--<li><a href="{{ url('artigos') }}" title="Artigos">Artigos</a></li>-->
             <li><a href="{{ url('material-de-apoio') }}" title="Material de Apoio">Material de Apoio</a></li>
             <li><a href="{{ url('eventos') }}" title="Eventos">Eventos</a></li>
             <li><a href="{{ url('entretenimentos') }}" title="Entretenimentos">Entretenimentos</a></li>
@@ -239,11 +239,11 @@ Contact: hello@brunomartins.com
         </ul>
         <div class="col-lg-3 col-md-3 col-sm-4 col-sm-offset-0 col-xs-12">
             <ul class="social-network">
-                <li><a href="https://www.facebook.com/espacofarmaceutico" target="_blank" class="facebook" title="Teuto no Facebook">Teuto no Facebook</a></li>
-                <li><a href="http://www.twitter.com/espfarmaceutico" target="_blank" class="twitter" title="Teuto no Twitter">Teuto no Twitter</a></li>
-                <li><a href="http://www.youtube.com/user/labteutopfizer" target="_blank" class="youtube" title="Teuto no Youtube">Teuto no YouTube</a></li>
-                <li><a href="http://www.instagram.com/labteuto" target="_blank" class="instagram" title="Teuto no Instagram">Teuto no Instagram</a></li>
-                <li><a href="http://www.linkedin.com/company/labteuto" target="_blank" class="linkedin" title="Teuto no LinkedIn">Teuto no LinkedIn</a></li>
+                <li><a href="{{ $websiteSettings['facebook'] }}" target="_blank" class="facebook" title="Teuto no Facebook">Teuto no Facebook</a></li>
+                <li><a href="{{ $websiteSettings['twitter'] }}" target="_blank" class="twitter" title="Teuto no Twitter">Teuto no Twitter</a></li>
+                <li><a href="{{ $websiteSettings['youtube'] }}" target="_blank" class="youtube" title="Teuto no Youtube">Teuto no YouTube</a></li>
+                <li><a href="{{ $websiteSettings['instagram'] }}" target="_blank" class="instagram" title="Teuto no Instagram">Teuto no Instagram</a></li>
+                <li><a href="{{ $websiteSettings['linkedin'] }}" target="_blank" class="linkedin" title="Teuto no LinkedIn">Teuto no LinkedIn</a></li>
             </ul>
             <div class="odd-links">
                 <a href="{{ url('conselhos-regionais') }}" class="font-size-11 text-white" title="Conselhos Regionais">Conselhos Regionais</a>

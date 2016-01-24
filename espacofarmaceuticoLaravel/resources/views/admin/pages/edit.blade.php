@@ -52,12 +52,12 @@
                 <!-- .block-content -->
                 <div class="block-content block-content-full">
                     {!! Form::open([
-                            'id' => 'pages',
-                            'method' => 'put',
-                            'class' => 'form-horizontal push-20-t',
-                            'enctype' => 'multipart/form-data',
-                            'url' => route('pagesEditPut')
-                            ])
+                        'id' => 'pages',
+                        'method' => 'put',
+                        'class' => 'form-horizontal push-20-t',
+                        'enctype' => 'multipart/form-data',
+                        'url' => route('pagesEditPut')
+                        ])
                     !!}
                     {!! Form::hidden('pagesId', $page->pagesId) !!}
                     <div class="form-group">

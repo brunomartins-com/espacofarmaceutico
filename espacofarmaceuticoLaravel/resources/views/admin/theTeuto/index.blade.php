@@ -38,7 +38,7 @@
             </div>
             <div class="block-content">
                 @if (Session::has('success'))
-                <div class="alert alert-info alert-dismissable">
+                <div class="alert alert-warning alert-dismissable">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     {!! Session::get('success') !!}
                 </div>
@@ -54,18 +54,26 @@
                 <!-- .block-content -->
                 <div class="block-content block-content-full">
                     {!! Form::open([
-                            'id' => 'theTeuto',
-                            'method' => 'put',
-                            'class' => 'form-horizontal push-20-t',
-                            'enctype' => 'multipart/form-data',
-                            'url' => route('theTeutoPut')
-                            ])
+                        'id' => 'theTeuto',
+                        'method' => 'put',
+                        'class' => 'form-horizontal push-20-t',
+                        'enctype' => 'multipart/form-data',
+                        'url' => route('theTeutoPut')
+                        ])
                     !!}
                     <div class="form-group">
                         <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
                             <div class="form-input">
                                 {!! Form::label('text', 'Texto *') !!}
                                 {!! Form::textarea('text', $texts->text, ['class'=>'form-control', 'id'=>'text']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-input">
+                                {!! Form::label('video', 'Vídeo *') !!}
+                                {!! Form::text('video', $video->text, ['class'=>'form-control', 'id'=>'video']) !!}
                             </div>
                         </div>
                     </div>
@@ -114,11 +122,17 @@ $(function(){
                 {
                     CKEDITOR.instances.text.updateElement();
                 }
+            },
+            'video': {
+                required: true
             }
         },
         messages: {
             'text': {
                 required: 'Informe o texto sobre O Teuto'
+            },
+            'video': {
+                required: 'Informe a URL do vídeo'
             }
         }
     });

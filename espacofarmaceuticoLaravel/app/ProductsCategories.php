@@ -35,8 +35,6 @@ class ProductsCategories extends Model {
             }
         endforeach;
 
-        Products::where('productsCategoriesId', '=', $productsCategoriesId)->delete();
-
-        return self::where('usersId', $userId)->delete();
+        return Products::where('productsCategoriesId', '=', $productsCategoriesId)->delete();
     }
 }

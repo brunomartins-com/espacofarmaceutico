@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Texts;
 use App\Pages;
-use App\WorkWithUsVacancy;
+use App\WorkWithUsVacancies;
 
 class WorkWithUsController extends Controller
 {
@@ -21,7 +21,7 @@ class WorkWithUsController extends Controller
         $mainText = Texts::find(16);
         $complementText = Texts::find(12);
 
-        $vacancies = WorkWithUsVacancy::orderBy('sortorder', 'asc')->get();
+        $vacancies = WorkWithUsVacancies::orderBy('sortorder', 'asc')->get();
 
         return view('website.workWithUs.index')->with(compact('page', 'websiteSettings', 'pages', 'link', 'mainText', 'complementText', 'vacancies'));
     }
