@@ -18,11 +18,12 @@ class BlogController extends Controller
         $pages = Pages::where('slug', '=', $page)->first();
         $blog = Blog::orderBy('date', 'desc');
         if(!empty($request->palavra)){
-            $blog = $blog->where('tags', 'LIKE', '%'.$request->palavra.'%');
+            $palavra = urldecode($request->palavra);
+            $blog = $blog->where('tags', 'LIKE', '%'.$palavra.'%');
         }
         $blog = $blog->paginate(4);
         if(!empty($request->palavra)) {
-            $blog->setPath('busca?palavra=' . $request->palavra . '&');
+            $blog->setPath('busca?palavra=' . $palavra . '&');
         }
         foreach($blog as $item){
             array_set($item, "date", Carbon::createFromFormat('Y-m-d', $item->date));

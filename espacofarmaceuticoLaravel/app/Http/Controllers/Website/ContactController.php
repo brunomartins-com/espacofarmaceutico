@@ -48,8 +48,8 @@ class ContactController extends Controller
         Mail::send('website.contact.email', ['request' => $request], function ($message) use ($websiteSettings) {
             $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
                 ->subject('Contato pelo Site [espacofarmaceutico.com.br]')
-                ->to($websiteSettings['email'])
-                ->to('hello@brunomartins.com');
+                //->to($websiteSettings['email'])
+                ->to('hello@josevieira.me');
         });
 
         $success = "Contato enviado com sucesso!";

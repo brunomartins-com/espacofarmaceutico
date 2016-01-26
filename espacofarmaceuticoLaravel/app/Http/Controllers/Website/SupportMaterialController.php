@@ -33,7 +33,7 @@ class SupportMaterialController extends Controller
         if($request->method() == "POST") {
             $this->validate($request, [
                 'height'        => 'required|max:4',
-                'weight'        => 'required|email|max:6'
+                'weight'        => 'required|max:6'
             ],
             [
                 'height.required'   => 'Informe a sua altura',

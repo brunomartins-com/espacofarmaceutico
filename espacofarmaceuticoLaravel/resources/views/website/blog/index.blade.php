@@ -17,7 +17,7 @@
 <div class="container">
     <section class="col-lg-10 col-lg-offset-1 col-md-12 col-md-offset-0 col-sm-12 col-xs-12 text-page">
         <header>
-            <h2 class="title pc80">{{ $pages->title }}<span class="hidden-xs hidden-sm">{{ isset($request->palavra) ? " - Tag: ".$request->palavra : "" }}</span>
+            <h2 class="title pc80">{{ $pages->title }}<span class="hidden-xs hidden-sm">{{ isset($request->palavra) ? " - Tag: ". urldecode($request->palavra) : "" }}</span>
             </h2>
             <div class="box-share pc20 hidden-xs">
                 @include('website.print-text-size')

@@ -32,14 +32,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($this->isHttpException($e))
-        {
-            return $this->renderHttpException($e);
+        if ($this->isHttpException($e)) {
+            $settings = self::readFile("websiteSettings.json");
+
+            $status = $e->getStatusCode();
+
+            if (view()->exists("errors.{$status}")) {
+                return response()->view(
+                    "errors.{$status}",
+                    ['exception' => $e, 'websiteSettings' => $settings, 'page' => 'not-found'],
+                    $status
+                );
+            }
+
+            return $this->convertExceptionToResponse($e);
         }
 
-
-        if (config('app.debug'))
-        {
+        if (config('app.debug')) {
             return $this->renderExceptionWithWhoops($e);
         }
 
