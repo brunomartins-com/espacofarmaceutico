@@ -42,7 +42,7 @@ class HomeController extends Controller
         foreach($blog as $item){
             array_set($item, 'date', Carbon::createFromFormat('Y-m-d', $item->date));
         }
-        $products = Products::orderByRaw('RAND()')->limit(8)->get();
+        $products = Products::getHomeCategories();
         $workWithUsHomeText = Texts::find($this->homeTextId);
         $workWithUsLink = Texts::find($this->linkId);
         $workWithUsImage = Texts::find($this->imageId);
