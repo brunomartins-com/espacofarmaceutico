@@ -13,6 +13,7 @@ Contact: hello@brunomartins.com
 <head>
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
     <title>@yield('title'){{ $websiteSettings['title'] }}</title>
     <link rel="shortcut icon" href="{!! asset('assets/images/_upload/dados-do-site/'.$websiteSettings['favicon']) !!}" />
     <link rel="apple-touch-icon" href="{{ asset('assets/images/_upload/dados-do-site/'.$websiteSettings['appleTouchIcon']) }}" />

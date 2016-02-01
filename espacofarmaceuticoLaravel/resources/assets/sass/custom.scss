@@ -361,22 +361,25 @@ body{
       font-size: 40px;
       font-weight: 400;
       color: $orange;
-      padding: 0 0 5px 40px;
-    }
-    @media (min-width: $screen-md-max) {
-      h2{
-        padding: 0 160px 5px 40px !important;
-      }
+      padding: 0 20px 5px 20px;
     }
     h3{
       font-size: 16px;
       font-weight: 400;
       color: $gray;
-      margin: 0 0 15px 40px;
+      margin: 0 20px 15px 20px;
     }
     .btn-main{
-      margin: 0 0 0 40px;
+      margin: 0 20px;
       text-transform: lowercase;
+    }
+    @media (min-width: $screen-md-max) {
+      h2{
+        padding: 0 160px 5px 40px !important;
+      }
+      h3, .btn-main{
+        margin: 0 160px 15px 40px !important;
+      }
     }
   }
 }

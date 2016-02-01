@@ -28,7 +28,13 @@
 <section id="banners" class="owl-carousel owl-theme">
     @foreach($banners as $banner)
     <article class="item">
-        <img src="{{ url('assets/images/_upload/banners/'.$banner->image) }}" alt="{{ $banner->title }}" class="img-responsive" />
+        @if($banner->url != "")
+        <a href="{{ $banner->url }}" target="{{ $banner->target }}">
+        @endif
+            <img src="{{ url('assets/images/_upload/banners/'.$banner->image) }}" alt="{{ $banner->title }}" class="img-responsive" />
+        @if($banner->url != "")
+        </a>
+        @endif
         <h2>{{ $banner->title }}</h2>
         <h3>{{ $banner->subtitle }}</h3>
         @if($banner->url != "")

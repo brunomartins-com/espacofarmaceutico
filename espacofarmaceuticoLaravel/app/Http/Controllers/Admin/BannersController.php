@@ -19,7 +19,7 @@ class BannersController extends Controller
     public function __construct(){
         $this->folder       = "assets/images/_upload/banners/";
         $this->imageWidth   = 700;
-        $this->imageHeight  = 812;
+        $this->imageHeight  = 650;
     }
 
     public function getIndex()
