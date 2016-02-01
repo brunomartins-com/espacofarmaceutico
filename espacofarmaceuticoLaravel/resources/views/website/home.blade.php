@@ -192,6 +192,7 @@
 <script>
 $(document).ready(function() {
     $("#banners").owlCarousel({
+        autoPlay : 5000,
         items : 3,
         itemsDesktop : [1000,3],
         itemsDesktopSmall : [900,2],
