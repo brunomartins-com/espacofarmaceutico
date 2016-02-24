@@ -49,6 +49,23 @@
                 'url' => url('contato')
                 ])
             !!}
+
+            <div class="form-group">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div class="form-input padding-top-7 text-orange font-size-14">
+                        {!! Form::label('peopleType', 'Pessoa:', ['class'=>'margin-right-10']) !!}
+                        <label class="radio-check margin-right-20">
+                            {!! Form::radio('peopleType', 'Física') !!}
+                            Física
+                        </label>
+                        <label class="radio-check">
+                            {!! Form::radio('peopleType', 'Jurídica') !!}
+                            Jurídica
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <div class="form-input">
@@ -56,6 +73,90 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group fisical-people hidden">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div class="form-input">
+                        <select name="youAre" id="youAre" class="form-control input-main">
+                            <option value="">Informe...</option>
+                            <option value="Estudante/Acadêmico/Universidade">Estudante/Acadêmico/Universidade</option>
+                            <option value="Consumidor/Paciente/Familiar">Consumidor/Paciente/Familiar</option>
+                            <option value="Clínica/Hospital">Clínica/Hospital</option>
+                            <option value="Distribuidor/Farmácia">Distribuidor/Farmácia</option>
+                            <option value="Entidade Governamental">Entidade Governamental</option>
+                            <option value="Imprensa">Imprensa</option>
+                            <option value="Organização não Governamental (ONG)">Organização não Governamental (ONG)</option>
+                            <option value="Prestador de Serviço">Prestador de Serviço</option>
+                            <option value="Fornecedor de Produto">Fornecedor de Produto</option>
+                            <option value="Profissional de Saúde">Profissional de Saúde</option>
+                            <option value="Outros não Listados">Outros não Listados</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group fisical-people hidden">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                    <div class="form-input">
+                        {!! Form::text('cpf', '', ['id'=>'cpf', 'class'=>'form-control input-main', 'data-mask'=>'000.000.000-00', 'placeholder'=>'CPF', 'maxlength'=>14]) !!}
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
+                    <div class="form-input">
+                        {!! Form::text('birthDate', '', ['id'=>'birthDate', 'class'=>'form-control input-main', 'data-mask'=>'00/00/0000', 'placeholder'=>'Data nascimento', 'maxlength'=>10]) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group juridical-people hidden">
+                <div class="col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                    <div class="form-input">
+                        {!! Form::text('cnpj', '', ['id'=>'cnpj', 'class'=>'form-control input-main', 'data-mask'=>'00.000.000/0000-00', 'placeholder'=>'CNPJ', 'maxlength'=>18]) !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-10">
+                    <div class="form-input">
+                        {!! Form::text('phone', '', ['id'=>'phone', 'class'=>'form-control input-main', 'placeholder'=>'Telefone p/ contato', 'maxlength'=>14]) !!}
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-5 col-sm-5 col-xs-10">
+                    <div class="form-input">
+                        {!! Form::text('mobile', '', ['id'=>'mobile', 'class'=>'form-control input-main', 'placeholder'=>'Celular p/ contato', 'maxlength'=>15]) !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div class="form-input">
+                        {!! Form::text('zipCode', '', ['id'=>'zipCode', 'class'=>'form-control input-main', 'data-mask'=>'00000000', 'placeholder'=>'CEP', 'maxlength'=>8]) !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+                    <div class="form-input">
+                        {!! Form::text('address', '', ['id'=>'address', 'class'=>'form-control input-main', 'placeholder'=>'Endereço', 'maxlength'=>200]) !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-4 col-md-4 col-sm-5 col-xs-9">
+                    <div class="form-input">
+                        {!! Form::select('state', $states, '', ['id'=>'state', 'class'=>'form-control input-main']) !!}
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
+                    <div class="form-input">
+                        {!! Form::select('city', [''=>'Escolha o Estado primeiro'], '', ['id'=>'city', 'class'=>'form-control input-main']) !!}
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <div class="form-input">
@@ -112,6 +213,95 @@ $('#contact').validate({
         },
         'message': {
             required: true
+        },
+
+        'cep': {
+            maxlength: 8,
+            required: true
+        },
+        'address': {
+            maxlength: 200,
+            required: true
+        },
+        'state': {
+            required: true
+        },
+        'city': {
+            required: true
+        },
+
+        'birthDate': {
+            dateBR: true,
+            required: function(element){
+                if($("#peopleType:checked").val() == 'Física'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        'productReasonOfContact': {
+            required: true
+        },
+        'peopleType': {
+            required: true
+        },
+        'cpf': {
+            cpf: true,
+            required: function(element){
+                if($("#peopleType:checked").val() == 'Física'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        'notifierBirthDay': {
+            dateBR: true,
+            required: function(element){
+                if($("#peopleType:checked").val() == 'Física'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        'cnpj': {
+            cnpj: true,
+            required: function(element){
+                if($("#peopleType:checked").val() == 'Jurídica'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        'youAre': {
+            required: function(element){
+                if($("#peopleType:checked").val() == 'Física'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        'phone': {
+            required: function(element){
+                if($("#mobile").val() == ''){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        },
+        'mobile': {
+            required: function(element){
+                if($("#phone").val() == ''){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
         }
     },
     messages: {
