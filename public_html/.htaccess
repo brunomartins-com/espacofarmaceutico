@@ -163,7 +163,10 @@ RewriteRule ^([a-z]{2})/novos-negocios/contato/envia?$ /novos_negocios_contato.p
 
 ## MARKETING
 RewriteRule ^([a-z]{2})/marketing/manual-identidade-visual/?$ /marketing_manual_identidade_visual.php [NC,L]
+RewriteRule ^([a-z]{2})/marketing/acoes-de-marketing/?$ /marketing_acoes_de_marketing.php [NC,L]
+RewriteRule ^([a-z]{2})/marketing/seu-negocio-mais-lucrativo/?$ /marketing_seu_negocio_lucrativo.php [NC,L]
 RewriteRule ^([a-z]{2})/marketing/endomarketing/?$ /marketing_endomarketing.php [NC,L]
+RewriteRule ^([a-z]{2})/marketing/endomarketing/pagina/([0-9]+)/?$ /marketing_endomarketing.php?pg=$1 [NC,L]
 RewriteRule ^([a-z]{2})/marketing/endomarketing/envia-participacao?$ /marketing_endomarketing.php?app=envia [NC,L]
 RewriteRule ^([a-z]{2})/marketing/videos-e-jingles/?$ /marketing_videos.php?categoria=9 [NC,L]
 RewriteRule ^([a-z]{2})/marketing/videos-e-jingles/videos/?$ /marketing_videos.php?categoria=9 [NC,L]
@@ -171,21 +174,49 @@ RewriteRule ^([a-z]{2})/marketing/videos-e-jingles/campanhas/?$ /marketing_video
 RewriteRule ^([a-z]{2})/marketing/videos-e-jingles/videos-3d/?$ /marketing_videos.php?categoria=11 [NC,L]
 RewriteRule ^([a-z]{2})/marketing/videos-e-jingles/jingles/?$ /marketing_videos.php?categoria=12 [NC,L]
 RewriteRule ^([a-z]{2})/marketing/feiras-e-eventos/?$ /marketing_feiras_eventos.php [NC,L]
-RewriteRule ^([a-z]{2})/marketing/feiras-e-eventos/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-_]+)/?$ /marketing_feiras_eventos.php?slug=$5&data=$2-$3-$4 [NC,L]
+RewriteRule ^([a-z]{2})/marketing/feiras-e-eventos/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-_]+)/?$ /marketing_feiras_eventos.php?slug=$4&data=$1-$2-$3 [NC,L]
 RewriteRule ^([a-z]{2})/marketing/visite-bem/?$ /marketing_visite_bem.php [NC,L]
 RewriteRule ^([a-z]{2})/marketing/visite-bem/filtro/?$ /marketing_visite_bem.php [NC,L]
-RewriteRule ^([a-z]{2})/marketing/visite-bem/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-_]+)/?$ /marketing_visite_bem.php?slug=$5&data=$2-$3-$4 [NC,L]
+RewriteRule ^([a-z]{2})/marketing/visite-bem/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-_]+)/?$ /marketing_visite_bem.php?slug=$4&data=$1-$2-$3 [NC,L]
 RewriteRule ^([a-z]{2})/marketing/visite-bem/envia/?$ /marketing_visite_bem.php?app=envia [NC,L]
-RewriteRule ^([a-z]{2})/marketing/acoes-promocionais/?$ /marketing_acoes.php [NC,L]
-RewriteRule ^([a-z]{2})/marketing/acoes-promocionais/pagina/([0-9]+)/?$ /marketing_acoes.php?pg=$2 [NC,L]
+RewriteRule ^([a-z]{2})/marketing/concursos-online/?$ /marketing_concursos_online.php [NC,L]
+RewriteRule ^([a-z]{2})/marketing/concursos-online/pagina/([0-9]+)/?$ /marketing_concursos_online.php?pg=$1 [NC,L]
+RewriteRule ^([a-z]{2})/marketing/aplicativos/?$ /marketing_aplicativos.php [NC,L]
+RewriteRule ^([a-z]{2})/marketing/aplicativos/pagina/([0-9]+)/?$ /marketing_aplicativos.php?pg=$1 [NC,L]
 
 ## IMPRENSA
 RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/?$ /imprensa_releases_noticias.php [NC,L]
-RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/pagina/([0-9]+)/?$ /imprensa_releases_noticias.php?pg=$2 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/pagina/([0-9]+)/?$ /imprensa_releases_noticias.php?pg=$1 [NC,L]
 RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/busca/?$ /imprensa_releases_noticias.php [NC,L]
-RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/busca/([a-z0-9-_]+)/?$ /imprensa_releases_noticias.php?$2 [NC,QSA]
-RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/editoria/([a-z0-9-]+)/?$ /imprensa_releases_noticias.php?editoria=$2 [NC,L]
-RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-]+)/?$ /imprensa_releases_noticias.php?leitura=sim&slug=$5&data=$2-$3-$4 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/busca/([a-z0-9-_]+)/?$ /imprensa_releases_noticias.php?$1 [NC,QSA]
+RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/editoria/([a-z0-9-]+)/?$ /imprensa_releases_noticias.php?editoria=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/releases-e-noticias/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-]+)/?$ /imprensa_releases_noticias.php?leitura=sim&slug=$4&data=$1-$2-$3 [NC,L]
+
+RewriteRule ^([a-z]{2})/imprensa/comunicados/?$ /imprensa_comunicados.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/comunicados/pagina/([0-9]+)/?$ /imprensa_comunicados.php?pg=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/comunicados/busca/?$ /imprensa_comunicados.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/comunicados/busca/([a-z0-9-_]+)/?$ /imprensa_comunicados.php?$1 [NC,QSA]
+RewriteRule ^([a-z]{2})/imprensa/comunicados/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-]+)/?$ /imprensa_comunicados.php?leitura=sim&slug=$4&data=$1-$2-$3 [NC,L]
+
+RewriteRule ^([a-z]{2})/imprensa/audio-release/?$ /imprensa_audio_release.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/audio-release/pagina/([0-9]+)/?$ /imprensa_audio_release.php?pg=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/audio-release/busca/?$ /imprensa_audio_release.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/audio-release/busca/([a-z0-9-_]+)/?$ /imprensa_audio_release.php?$1 [NC,QSA]
+RewriteRule ^([a-z]{2})/imprensa/audio-release/editoria/([a-z0-9-]+)/?$ /imprensa_audio_release.php?editoria=$1 [NC,L]
+
+RewriteRule ^([a-z]{2})/imprensa/teuto-na-midia/?$ /imprensa_midia.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/teuto-na-midia/pagina/([0-9]+)/?$ /imprensa_midia.php?pg=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/teuto-na-midia/busca/?$ /imprensa_midia.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/teuto-na-midia/busca/([a-z0-9-_]+)/?$ /imprensa_midia.php?$1 [NC,QSA]
+RewriteRule ^([a-z]{2})/imprensa/teuto-na-midia/editoria/([a-z0-9-]+)/?$ /imprensa_midia.php?editoria=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/teuto-na-midia/([0-9]{4})/([0-9]{2})/([0-9]{2})/([a-z0-9-]+)/?$ /imprensa_midia.php?leitura=sim&slug=$4&data=$1-$2-$3 [NC,L]
+
+RewriteRule ^([a-z]{2})/imprensa/revista-teuto-pfizer/?$ /imprensa_revista.php [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/revista-teuto-pfizer/pagina/([0-9]+)/?$ /imprensa_revista.php?pg=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/revista-teuto-pfizer/([a-z0-9-]+)/?$ /imprensa_revista.php?slug=$1 [NC,L]
+RewriteRule ^([a-z]{2})/imprensa/revista-teuto-pfizer/([a-z0-9-]+)/pagina/([0-9]+)/?$ /imprensa_revista.php?slug=$1&pg=$2 [NC,L]
+
+RewriteRule ^([a-z]{2})/imprensa/atendimento-a-imprensa/?$ /imprensa_atendimento.php [NC,L]
 
 ## COMPRE TEUTO
 RewriteRule ^([a-z]{2})/compre-teuto/?$ /compre_teuto.php [NC,L]
@@ -211,36 +242,38 @@ RewriteRule ^([a-z]{2})/treinamento/?$ /produtos_e_learning.php [NC,L]
 
 ## PRODUTOS
 RewriteRule ^([a-z]{2})/produtos/?$ /produtos.php [NC,L]
-RewriteRule ^([a-z]{2})/produtos/pagina/([0-9]+)/?$ /produtos.php?pg=$2 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/pagina/([0-9]+)/?$ /produtos.php?pg=$1 [NC,L]
 
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/?$ /produtos.php?categoria=$2 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos.php?categoria=$2&pg=$3 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/?$ /produtos.php?categoria=$1 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos.php?categoria=$1&pg=$2 [NC,L]
 
 RewriteRule ^([a-z]{2})/produtos/busca/?$ /produtos.php [NC,L]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca/?$ /produtos.php?categoria=$2 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/busca/([a-z0-9-_]+)/?$ /produtos.php?$2 [NC,QSA]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca/([a-z0-9-_]+)/?$ /produtos.php?$3&categoria=$2 [NC,QSA]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca/?$ /produtos.php?categoria=$1 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/busca/([a-z0-9-_]+)/?$ /produtos.php?$1 [NC,QSA]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca/([a-z0-9-_]+)/?$ /produtos.php?$2&categoria=$1 [NC,QSA]
 
 RewriteRule ^([a-z]{2})/produtos/busca-nome/?$ /produtos.php [NC,L]
-RewriteRule ^([a-z]{2})/produtos/busca-nome/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos.php?slug=$2&pg=$3 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-nome/?$ /produtos.php?categoria=$2 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-nome/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos.php?categoria=$2&slug=$3&pg=$4 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/busca-nome/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos.php?slug=$1&pg=$2 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-nome/?$ /produtos.php?categoria=$1 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-nome/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos.php?categoria=$1&slug=$2&pg=$3 [NC,L]
 
 RewriteRule ^([a-z]{2})/produtos/busca-principio-ativo/?$ /produtos.php [NC,L]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-principio-ativo/?$ /produtos.php?categoria=$2 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/busca-principio-ativo/([a-z0-9-_]+)/?$ /produtos.php?$2 [NC,QSA]
-RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-principio-ativo/([a-z0-9-_]+)/?$ /produtos.php?$3&categoria=$2 [NC,QSA]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-principio-ativo/?$ /produtos.php?categoria=$1 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/busca-principio-ativo/([a-z0-9-_]+)/?$ /produtos.php?$1 [NC,QSA]
+RewriteRule ^([a-z]{2})/produtos/categoria/([a-z0-9-]+)/busca-principio-ativo/([a-z0-9-_]+)/?$ /produtos.php?$2&categoria=$1 [NC,QSA]
 
 #RewriteRule ^([a-z]{2})/produtos/e-learning/?$ /produtos_e_learning.php [NC,L]
 RewriteRule ^([a-z]{2})/produtos/universidade-teuto/?$ /produtos_e_learning.php [NC,L]
 RewriteRule ^([a-z]{2})/produtos/teuto-university/?$ /produtos_e_learning.php [NC,L]
 
 RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/?$ /produtos_catalogos_digitais.php [NC,L]
-RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/pagina/([0-9]+)/?$ /produtos_catalogos_digitais.php?pg=$2 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/([a-z0-9-]+)/?$ /produtos_catalogos_digitais.php?slug=$2 [NC,L]
-RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos_catalogos_digitais.php?slug=$2&pg=$3 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/pagina/([0-9]+)/?$ /produtos_catalogos_digitais.php?pg=$1 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/([a-z0-9-]+)/?$ /produtos_catalogos_digitais.php?slug=$1 [NC,L]
+RewriteRule ^([a-z]{2})/produtos/catalogos-digitais/([a-z0-9-]+)/pagina/([0-9]+)/?$ /produtos_catalogos_digitais.php?slug=$1&pg=$2 [NC,L]
 
 RewriteRule ^([a-z]{2})/produtos/hotsites/?$ /produtos_hotsites.php [NC,L]
+
+RewriteRule ^([a-z]{2})/produtos/medicamentos-equivalentes/?$ /produtos_medicamentos_equivalentes.php [NC,L]
 
 
 <IfModule mod_deflate.c>

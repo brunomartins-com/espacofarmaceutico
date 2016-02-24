@@ -30,7 +30,7 @@
             <h3 class="font-size-30 text-orange strong">{{ $blog->title }}</h3>
             <hr>
             <time>{{ $blog->date->formatLocalized('%d - %B - %Y') }}</time>
-            @if(!empty($blog->autorFonte))
+            @if(!empty($blog->autorSource))
             <p class="autor-font">
                 <span>Autor/Fonte:</span>
                 <br>

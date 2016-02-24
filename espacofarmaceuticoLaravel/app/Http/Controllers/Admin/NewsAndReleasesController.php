@@ -62,7 +62,7 @@ class NewsAndReleasesController extends Controller
             'subtitle'      => 'required|max:240',
             'text'          => 'required',
             'tags'          => 'required',
-            'image'         => 'required|image|mimes:jpeg,gif,png'
+            'image'         => 'image|mimes:jpeg,gif,png'
         ],
         [
             'date.required'         => 'Informe a data',
@@ -73,7 +73,6 @@ class NewsAndReleasesController extends Controller
             'subtitle.max'          => 'O sub-título não pode passar de :max caracteres',
             'text.required'         => 'Informe o texto',
             'tags.required'         => 'Informe as tags',
-            'image.required'        => 'Envie a imagem',
             'image.image'           => 'Envie um formato de imagem válida',
             'image.mimes'           => 'Formatos suportados: .jpg, .gif e .png'
         ]);
@@ -86,15 +85,17 @@ class NewsAndReleasesController extends Controller
         $newsAndReleases->tags         = $request->tags;
         $newsAndReleases->slug         = str_slug($request->title, '-');
 
-        //IMAGE
-        $extension = $request->image->getClientOriginalExtension();
-        $nameImage = Carbon::now()->format('YmdHis').".".$extension;
-        $image = Image::make($request->file('image'));
-        if($request->imageCropAreaW > 0 or $request->imageCropAreaH > 0 or $request->imagePositionX or $request->imagePositionY){
-            $image->crop($request->imageCropAreaW, $request->imageCropAreaH, $request->imagePositionX, $request->imagePositionY);
+        if ($request->image) {
+            //IMAGE
+            $extension = $request->image->getClientOriginalExtension();
+            $nameImage = Carbon::now()->format('YmdHis').".".$extension;
+            $image = Image::make($request->file('image'));
+            if($request->imageCropAreaW > 0 or $request->imageCropAreaH > 0 or $request->imagePositionX or $request->imagePositionY){
+                $image->crop($request->imageCropAreaW, $request->imageCropAreaH, $request->imagePositionX, $request->imagePositionY);
+            }
+            $image->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
+            $newsAndReleases->image = $nameImage;
         }
-        $image->resize($this->imageWidth, $this->imageHeight)->save($this->folder.$nameImage);
-        $newsAndReleases->image = $nameImage;
 
         $newsAndReleases->save();
 

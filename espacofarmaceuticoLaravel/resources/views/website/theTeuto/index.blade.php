@@ -26,7 +26,7 @@
         <aside class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <h3 class="text-orange font-size-24">{{ $pages->description }}</h3>
             <div class="calls margin-top-20 hidden-xs hidden-sm">
-                <a href="#" id="teuto-360" title="Teuto 360º">
+                <a href="http://teuto.com.br/o-teuto/estrutura" target="_blank" title="Teuto 360º">
                     <img src="{{ asset('assets/images/teuto-360.jpg') }}" class="img-responsive" alt="Teuto 360º" />
                 </a>
             </div>

@@ -181,9 +181,6 @@ $(function(){
             },
             'tags': {
                 required: true
-            },
-            'image': {
-                required: true
             }
         },
         messages: {
@@ -201,9 +198,6 @@ $(function(){
             },
             'tags': {
                 required: 'Informe as tags'
-            },
-            'image': {
-                required: 'Informe a imagem para upload'
             }
         }
     });

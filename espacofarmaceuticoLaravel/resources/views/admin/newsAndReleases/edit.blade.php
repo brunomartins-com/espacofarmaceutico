@@ -108,7 +108,11 @@
                                 <img />
                             </div>
                             <div class="img-current">
-                                <img src="{!! url($imageDetails['folder'].$newsAndReleases->image)."?".time() !!}" alt="{{ $newsAndReleases->title }}" class="img-responsive" />
+                                @if($newsAndReleases->image)
+                                    <img src="{!! url($imageDetails['folder'].$newsAndReleases->image)."?".time() !!}" alt="{{ $newsAndReleases->title }}" class="img-responsive" />
+                                @else
+                                    <img src="http://placehold.it/{{ $imageDetails['imageWidth'] }}x{{ $imageDetails['imageHeight'] }}" alt="Adicionar Chamada" class="img-responsive" />
+                                @endif
                             </div>
                             <div class="font-size-10 push-10-t">Tamanho: {{ $imageDetails['imageWidth']." x ".$imageDetails['imageHeight'] }} pixels</div>
                             <br>
