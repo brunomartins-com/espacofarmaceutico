@@ -93,22 +93,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                        <div class="col-lg-8 col-md-10 col-sm-10 col-xs-12">
                             <div class="form-input">
-                                {!! Form::label('currentBull', 'Bula Atual') !!}
-                                {!! Form::hidden('currentBull', $product->bull) !!}
-                                <br>
-                                <a href="{!! url($imageDetails['folderBull'].$product->bull) !!}" target="_blank" class="btn btn-xs btn-inverse"><i class="si si-cloud-download"></i> Download</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
-                            <div class="form-input">
-                                {!! Form::label('bull', 'Alterar Bula') !!}
-                                {!! Form::file('bull', ['id'=>'bull', 'accept'=>'application/pdf,application/zip,application/x-rar-compressed,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword']) !!}
-                                <br>
-                                <em class="font-s12">Tamanho Máximo: 2 Mb</em>
+                                {!! Form::label('bull', 'Bula *') !!}
+                                {!! Form::textarea('bull', $product->bull, ['class'=>'form-control', 'id'=>'bull', 'rows' => 3]) !!}
                             </div>
                         </div>
                     </div>
@@ -180,6 +168,9 @@ $(function(){
             },
             'presentation': {
                 required: true
+            },
+            'bull': {
+                required: true
             }
         },
         messages: {
@@ -191,6 +182,9 @@ $(function(){
             },
             'presentation': {
                 required: 'Informe a apresentação do produto'
+            },
+            'bull': {
+                required: 'Informe o endereço da bula do produto'
             }
         }
     });

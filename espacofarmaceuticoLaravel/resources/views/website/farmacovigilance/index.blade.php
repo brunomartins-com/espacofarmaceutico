@@ -157,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group hidden">
+            <div class="form-group">
                 <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
                     <div class="form-input">
                         <select name="youAre" id="youAre" class="form-control input-main">

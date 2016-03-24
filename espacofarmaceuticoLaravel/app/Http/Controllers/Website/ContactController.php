@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Pages;
 use App\Texts;
+use App\EmailsContact;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -72,11 +73,15 @@ class ContactController extends Controller
 
         array_set($request, "date", Carbon::now()->format('d/m/Y'));
 
-        Mail::send('website.contact.email', ['request' => $request], function ($message) use ($websiteSettings) {
-            $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
-                ->subject('Contato pelo Site [espacofarmaceutico.com.br]')
-                ->to($websiteSettings['email'])
-                ->to('hello@brunomartins.com');
+        $emails = EmailsContact::find(1);
+
+        Mail::send('website.contact.email', ['request' => $request], function ($message) use ($emails) {
+            $emailsSend = explode(',', $emails->emails);
+            foreach($emailsSend as $email){
+                $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
+                    ->subject('Contato pelo Site [espacofarmaceutico.com.br]')
+                    ->to($email);
+            }
         });
 
         $success = "Contato enviado com sucesso!";

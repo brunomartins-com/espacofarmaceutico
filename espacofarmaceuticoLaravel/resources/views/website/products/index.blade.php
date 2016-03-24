@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-lg-5 col-md-5 col-sm-5 hidden-xs"><p>{{ $product->presentation }}</p></div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 text-center">
-                    <a href="#" class="btn-pdf" title="{{ $product->name }}"></a>
+                    <a href="{{ $product->bull }}" target="_blank" class="btn-pdf" title="{{ $product->name }}"></a>
                 </div>
             </article>
             @endforeach

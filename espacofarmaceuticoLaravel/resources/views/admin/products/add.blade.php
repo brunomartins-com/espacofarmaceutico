@@ -91,12 +91,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                        <div class="col-lg-8 col-md-10 col-sm-10 col-xs-12">
                             <div class="form-input">
                                 {!! Form::label('bull', 'Bula *') !!}
-                                {!! Form::file('bull', ['id'=>'bull', 'accept'=>'application/pdf,application/zip,application/x-rar-compressed,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword']) !!}
-                                <br>
-                                <em class="font-s12">Tamanho Máximo: 2 Mb</em>
+                                {!! Form::textarea('bull', '', ['class'=>'form-control', 'id'=>'bull', 'rows' => 3]) !!}
                             </div>
                         </div>
                     </div>
@@ -186,7 +184,7 @@ $(function(){
                 required: 'Informe a apresentação do produto'
             },
             'bull': {
-                required: 'Faça o upload da bula do produto'
+                required: 'Informe o endereço da bula do produto'
             },
             'image': {
                 required: 'Escolha uma imagem para o produto'

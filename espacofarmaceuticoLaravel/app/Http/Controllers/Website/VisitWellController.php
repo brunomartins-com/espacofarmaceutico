@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Texts;
 use App\VisitWellPhotos;
 use App\Pages;
-
+use App\EmailsVisitWell;
 
 class VisitWellController extends Controller
 {
@@ -180,11 +180,15 @@ class VisitWellController extends Controller
 
         array_set($request, "date", Carbon::now()->format('d/m/Y'));
 
-        Mail::send('website.visitWell.email', ['request' => $request], function ($message) use ($websiteSettings) {
-            $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
-                ->subject('Agende sua Visita - Visite Bem')
-                ->to('treinamentomkt@teuto.com.br')
-                ->to('hello@brunomartins.com');
+        $emails = EmailsVisitWell::find(1);
+
+        Mail::send('website.visitWell.email', ['request' => $request], function ($message) use ($emails) {
+            $emailsSend = explode(',', $emails->emails);
+            foreach($emailsSend as $email){
+                $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
+                    ->subject('Agende sua Visita - Visite Bem [espacofarmaceutico.com.br]')
+                    ->to($email);
+            }
         });
 
         $success = "E-mail enviado com sucesso!";

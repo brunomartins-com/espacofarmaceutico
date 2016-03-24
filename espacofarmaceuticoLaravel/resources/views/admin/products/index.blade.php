@@ -89,7 +89,6 @@
                                     ])
                                 !!}
                                 {!! Form::hidden('productsId', $product->productsId) !!}
-                                {!! Form::hidden('bull', $product->bull) !!}
                                 {!! Form::hidden('image', $product->image) !!}
                                 {!! Form::button('<i class="fa fa-trash"></i>', ['title'=>'Excluir', 'data-toggle'=>'tooltip', 'class'=>'btn btn-xs btn-danger btn-delete',
                                 'data-url'=>route('productsDelete'), 'data-form'=>true, 'data-id-form'=>'textDelete'.$product->productsId]) !!}

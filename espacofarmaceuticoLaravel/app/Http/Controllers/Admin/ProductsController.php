@@ -66,7 +66,7 @@ class ProductsController extends Controller
             'name'                  => 'required|max:100',
             'productsCategoriesId'  => 'required',
             'presentation'          => 'required',
-            'bull'                  => 'required|mimes:pdf,doc,docx,zip,rar',
+            'bull'                  => 'required',
             'image'                 => 'required|image|mimes:jpeg,gif,png'
         ],
         [
@@ -74,8 +74,7 @@ class ProductsController extends Controller
             'name.max'                      => 'O nome do produto não pode passar de :max caracteres',
             'productsCategoriesId.required' => 'Escolha a categoria do produto',
             'presentation.required'         => 'Informe a apresentação do produto',
-            'bull.required'                 => 'Envie a bula do produto',
-            'bull.mimes'                    => 'O formato da bula que você enviou não é válido',
+            'bull.required'                 => 'Informe o endereço da bula',
             'image.required'                => 'Envie a imagem do produto',
             'image.image'                   => 'Envie um formato de imagem válida',
             'image.mimes'                   => 'Formatos suportados: .jpg, .gif e .png'
@@ -86,13 +85,8 @@ class ProductsController extends Controller
         $product->productsCategoriesId  = $request->productsCategoriesId;
         $product->activePrinciple       = $request->activePrinciple;
         $product->presentation          = $request->presentation;
+        $product->bull                  = $request->bull;
         $product->slug                  = str_slug($request->name, '-');
-
-        //BULL
-        $extension = $request->bull->getClientOriginalExtension();
-        $nameBull = Carbon::now()->format('YmdHis').".".$extension;
-        $request->file('bull')->move($this->folderBull, $nameBull);
-        $product->bull = $nameBull;
 
         //IMAGE
         $extension = $request->image->getClientOriginalExtension();
@@ -146,7 +140,7 @@ class ProductsController extends Controller
             'name'                  => 'required|max:100',
             'productsCategoriesId'  => 'required',
             'presentation'          => 'required',
-            'bull'                  => 'mimes:pdf,doc,docx,zip,rar',
+            'bull'                  => 'required',
             'image'                 => 'image|mimes:jpeg,gif,png'
         ],
         [
@@ -154,7 +148,7 @@ class ProductsController extends Controller
             'name.max'                      => 'O nome do produto não pode passar de :max caracteres',
             'productsCategoriesId.required' => 'Escolha a categoria do produto',
             'presentation.required'         => 'Informe a apresentação do produto',
-            'bull.mimes'                    => 'O formato da bula que você enviou não é válido',
+            'bull.required'                 => 'Informe o endereço da bula',
             'image.image'                   => 'Envie um formato de imagem válida',
             'image.mimes'                   => 'Formatos suportados: .jpg, .gif e .png'
         ]);
@@ -164,21 +158,8 @@ class ProductsController extends Controller
         $product->productsCategoriesId  = $request->productsCategoriesId;
         $product->activePrinciple       = $request->activePrinciple;
         $product->presentation          = $request->presentation;
+        $product->bull                  = $request->bull;
         $product->slug                  = str_slug($request->name, '-');
-
-        if ($request->bull) {
-            //DELETE OLD BULL
-            if($request->currentBull != ""){
-                if(File::exists($this->folderBull.$request->currentBull)){
-                    File::delete($this->folderBull.$request->currentBull);
-                }
-            }
-            //BULL
-            $extension = $request->bull->getClientOriginalExtension();
-            $nameBull = Carbon::now()->format('YmdHis').".".$extension;
-            $request->file('bull')->move($this->folderBull, $nameBull);
-            $product->bull = $nameBull;
-        }
 
         if ($request->image) {
             //DELETE OLD IMAGE
@@ -212,11 +193,6 @@ class ProductsController extends Controller
             return redirect(route('products'))->withErrors(['Você não pode deletar produtos.']);
         }
 
-        if ($request->bull != "") {
-            if (File::exists($this->folderBull . $request->bull)) {
-                File::delete($this->folderBull . $request->bull);
-            }
-        }
         if ($request->image != "") {
             if (File::exists($this->folder . $request->image)) {
                 File::delete($this->folder . $request->image);

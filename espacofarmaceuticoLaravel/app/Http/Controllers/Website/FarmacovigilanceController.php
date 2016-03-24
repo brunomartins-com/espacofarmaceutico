@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Texts;
 use App\Pages;
 use App\Newsletter;
+use App\EmailsFarmacovigilance;
 
 class FarmacovigilanceController extends Controller
 {
@@ -96,11 +97,15 @@ class FarmacovigilanceController extends Controller
 
         array_set($request, "date", Carbon::now()->format('d/m/Y'));
 
-        Mail::send('website.farmacovigilance.email', ['request' => $request], function ($message) use ($websiteSettings) {
-            $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
-                ->subject('Farmacovigilância [espacofarmaceutico.com.br]')
-                ->to($websiteSettings['email'])
-                ->to('hello@brunomartins.com');
+        $emails = EmailsFarmacovigilance::find(1);
+
+        Mail::send('website.farmacovigilance.email', ['request' => $request], function ($message) use ($emails) {
+            $emailsSend = explode(',', $emails->emails);
+            foreach($emailsSend as $email){
+                $message->from('webmaster@teuto.com.br', 'Teuto/Pfizer')
+                    ->subject('Farmacovigilância [espacofarmaceutico.com.br]')
+                    ->to($email);
+            }
         });
 
         $success = "E-mail enviado com sucesso!";
